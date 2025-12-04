@@ -1,0 +1,139 @@
+---
+title: Visão Geral
+description: Os componentes de construção dos seus fluxos de trabalho de IA
+---
+
+import { Card, Cards } from 'fumadocs-ui/components/card'
+import { Step, Steps } from 'fumadocs-ui/components/steps'
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
+import { Video } from '@/components/ui/video'
+
+Os blocos são os componentes de construção que você conecta para criar fluxos de trabalho de IA. Pense neles como módulos especializados que lidam com tarefas específicas—desde conversar com modelos de IA até realizar chamadas API ou processar dados.
+
+<div className="w-full max-w-2xl mx-auto overflow-hidden rounded-lg">
+  <Video src="connections.mp4" width={700} height={450} />
+</div>
+
+## Tipos de blocos principais
+
+O Sim fornece tipos de blocos essenciais que lidam com as funções principais dos fluxos de trabalho de IA:
+
+### Blocos de processamento
+- **[Agente](/blocks/agent)** - Conversa com modelos de IA (OpenAI, Anthropic, Google, modelos locais)
+- **[Função](/blocks/function)** - Executa código personalizado de JavaScript/TypeScript
+- **[API](/blocks/api)** - Conecta com serviços externos mediante requisições HTTP
+
+### Blocos lógicos
+- **[Condição](/blocks/condition)** - Ramifica caminhos de fluxo de trabalho baseados em expressões booleanas
+- **[Roteador](/blocks/router)** - Usa IA para direcionar inteligentemente solicitações para diferentes caminhos
+- **[Avaliador](/blocks/evaluator)** - Pontua e avalia a qualidade do conteúdo usando IA
+
+### Blocos de fluxo de controle
+- **[Variáveis](/blocks/variables)** - Estabelecer e gerenciar variáveis com escopo de fluxo de trabalho
+- **[Espera](/blocks/wait)** - Pausar a execução do fluxo de trabalho durante um tempo específico
+
+### Blocos de saída
+- **[Resposta](/blocks/response)** - Formatar e retornar resultados finais do seu fluxo de trabalho
+
+## Como funcionam os blocos
+
+Cada bloco tem três componentes principais:
+
+**Entradas**: Dados que entram no bloco de outros blocos ou entrada do usuário
+**Configuração**: Ajustes que controlam como o bloco se comporta
+**Saídas**: Dados que o bloco produz para que outros blocos utilizem
+
+<Steps>
+  <Step>
+    <strong>Receber entrada</strong>: O bloco recebe dados de blocos conectados ou entrada do usuário
+  </Step>
+  <Step>
+    <strong>Processar</strong>: O bloco processa a entrada de acordo com sua configuração
+  </Step>
+  <Step>
+    <strong>Resultados de saída</strong>: O bloco produz dados de saída para os blocos seguintes no fluxo de trabalho
+  </Step>
+</Steps>
+
+## Conectando blocos
+
+Você cria fluxos de trabalho conectando blocos entre si. A saída de um bloco se torna a entrada de outro:
+
+- **Arrastar para conectar**: Arraste de uma porta de saída para uma porta de entrada
+- **Múltiplas conexões**: Uma saída pode se conectar a múltiplas entradas
+- **Rotas ramificadas**: Alguns blocos podem direcionar para diferentes rotas de acordo com condições
+
+<div className="w-full max-w-2xl mx-auto overflow-hidden rounded-lg">
+  <Video src="connections.mp4" width={700} height={450} />
+</div>
+
+## Padrões comuns
+
+### Processamento sequencial
+Conecte blocos em cadeia onde cada bloco processa a saída do anterior:
+
+```
+User Input → Agent → Function → Response
+```
+
+### Ramificação condicional
+Utilize blocos de Condição ou Roteador para criar diferentes rotas:
+
+```
+User Input → Router → Agent A (for questions)
+                   → Agent B (for commands)
+```
+
+### Controle de qualidade
+Utilize blocos Avaliadores para avaliar e filtrar saídas:
+
+```
+Agent → Evaluator → Condition → Response (if good)
+                              → Agent (retry if bad)
+```
+
+## Configuração de blocos
+
+Cada tipo de bloco tem opções de configuração específicas:
+
+**Todos os blocos**:
+- Conexões de entrada/saída
+- Comportamento de tratamento de erros
+- Configuração de tempo de espera de execução
+
+**Blocos de IA** (Agente, Roteador, Avaliador):
+- Seleção de modelo (OpenAI, Anthropic, Google, local)
+- Chaves API e autenticação
+- Temperatura e outros parâmetros do modelo
+- Instruções e prompts do sistema
+
+**Blocos lógicos** (Condição, Função):
+- Expressões ou código personalizado
+- Referências de variáveis
+- Configuração do ambiente de execução
+
+**Blocos de integração** (API, Resposta):
+- Configuração de endpoint
+- Cabeçalhos e autenticação
+- Formato de requisição/resposta
+
+<Cards>
+  <Card title="Bloco de agente" href="/blocks/agent">
+    Conecte-se a modelos de IA e crie respostas inteligentes
+  </Card>
+  <Card title="Bloco de função" href="/blocks/function">
+    Execute código personalizado para processar e transformar dados
+  </Card>
+  <Card title="Bloco de API" href="/blocks/api">
+    Integre-se com serviços externos e APIs
+  </Card>
+  <Card title="Bloco de condição" href="/blocks/condition">
+    Crie lógica de ramificação baseada em avaliação de dados
+  </Card>
+  <Card title="Bloco de variáveis" href="/blocks/variables">
+    Estabeleça e gerencie variáveis com escopo de fluxo de trabalho
+  </Card>
+  <Card title="Bloco de espera" href="/blocks/wait">
+    Pause a execução do fluxo de trabalho durante atrasos de tempo específicos
+  </Card>
+</Cards>

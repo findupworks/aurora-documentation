@@ -1,0 +1,153 @@
+---
+title: Visão Geral
+---
+
+import { Callout } from 'fumadocs-ui/components/callout'
+import { Card, Cards } from 'fumadocs-ui/components/card'
+import { Image } from '@/components/ui/image'
+
+O motor de execução do Sim dá vida aos seus fluxos de trabalho processando blocos na ordem correta, gerenciando o fluxo de dados e lidando com erros elegantemente, para que você possa entender exatamente como os fluxos de trabalho são executados no Sim.
+
+<Callout type="info">
+  Cada execução de fluxo de trabalho segue uma rota determinística baseada nas suas conexões de blocos e lógica, garantindo resultados previsíveis e confiáveis.
+</Callout>
+
+## Resumo da documentação
+
+<Cards>
+  <Card title="Fundamentos de execução" href="/execution/basics">
+    Aprenda sobre o fluxo de execução fundamental, tipos de blocos e como os dados fluem através do seu
+    fluxo de trabalho
+  </Card>
+
+  <Card title="Registro" href="/execution/logging">
+    Monitore as execuções de fluxos de trabalho com registro completo e visibilidade em tempo real
+  </Card>
+  
+  <Card title="Cálculo de custos" href="/execution/costs">
+    Entenda como os custos de execução de fluxos de trabalho são calculados e otimizados
+  </Card>
+  
+  <Card title="API externa" href="/execution/api">
+    Acesse registros de execução e configure webhooks programaticamente através de API REST
+  </Card>
+</Cards>
+
+## Conceitos-chave
+
+### Execução topológica
+Os blocos são executados em ordem de dependência, similar a como uma planilha recalcula células. O motor de execução determina automaticamente quais blocos podem ser executados com base nas dependências concluídas.
+
+### Rastreamento de rotas
+O motor rastreia ativamente as rotas de execução através do seu fluxo de trabalho. Os blocos de roteador e condição atualizam dinamicamente essas rotas, garantindo que apenas os blocos relevantes sejam executados.
+
+### Processamento baseado em camadas
+Em vez de executar blocos um por um, o motor identifica camadas de blocos que podem ser executadas em paralelo, otimizando o desempenho para fluxos de trabalho complexos.
+
+### Contexto de execução
+Cada fluxo de trabalho mantém um contexto enriquecido durante a execução que contém:
+- Saídas e estados de blocos
+- Rotas de execução ativas
+- Rastreamento de iterações de loop e paralelas
+- Variáveis de ambiente
+- Decisões de roteamento
+
+## Disparadores de execução
+
+Os fluxos de trabalho podem ser executados através de múltiplos canais:
+
+- **Manual**: Teste e depure diretamente no editor
+- **Implantar como API**: Crie um ponto de conexão HTTP protegido com chaves API
+- **Implantar como Chat**: Crie uma interface conversacional em um subdomínio personalizado
+- **Webhooks**: Responda a eventos externos de serviços de terceiros
+- **Agendado**: Execute em um horário recorrente usando expressões cron
+
+### Implantar como API
+
+Quando você implanta um fluxo de trabalho como API, o Sim:
+- Cria um ponto de conexão HTTP único: `https://sim.ai/api/workflows/{workflowId}/execute`
+- Gera uma chave API para autenticação
+- Aceita requisições POST com cargas úteis JSON
+- Retorna os resultados de execução do fluxo de trabalho como JSON
+
+Exemplo de chamada API:
+
+```bash
+curl -X POST https://sim.ai/api/workflows/your-workflow-id/execute \
+  -H "X-API-Key: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{"input": "your data here"}'
+```
+
+### Implantar como Chat
+
+A implantação de chat cria uma interface conversacional para o seu fluxo de trabalho:
+- Hospedado em um subdomínio personalizado: `https://your-name.sim.ai`
+- Autenticação opcional (pública, com senha ou baseada em e-mail)
+- Interface de usuário personalizável com sua marca
+- Respostas em streaming para interação em tempo real
+- Perfeito para assistentes de IA, bots de suporte ou ferramentas interativas
+
+Cada método de implantação passa dados para o bloco inicial do seu fluxo de trabalho, iniciando o fluxo de execução.
+
+## Instantâneos de implantação
+
+Todos os pontos de entrada públicos—API, Chat, Agendamento, Webhook e execuções manuais—executam o instantâneo de implantação ativo do fluxo de trabalho. Publique um novo deployment sempre que alterar a tela para que cada disparador utilize a versão atualizada.
+
+<div className='flex justify-center my-6'>
+  <Image
+    src='/static/execution/deployment-versions-light.png'
+    alt='Tabela de versões de implantação'
+    width={500}
+    height={280}
+    className='rounded-xl border border-border shadow-sm'
+  />
+</div>
+
+O modal de Implantação mantém um histórico completo de versões—inspecione qualquer instantâneo, compare-o com seu rascunho e promova ou reverta com um clique quando precisar restaurar uma versão anterior.
+
+## Execução programática
+
+Execute fluxos de trabalho a partir das suas aplicações usando nossos SDKs oficiais:
+
+```bash
+# TypeScript/JavaScript
+npm install simstudio-ts-sdk
+
+# Python
+pip install simstudio-sdk
+```
+
+```typescript
+// Exemplo TypeScript
+import { SimStudioClient } from 'simstudio-ts-sdk';
+
+const client = new SimStudioClient({ 
+  apiKey: 'your-api-key' 
+});
+
+const result = await client.executeWorkflow('workflow-id', {
+  input: { message: 'Hello' }
+});
+```
+
+## Melhores práticas
+
+### Projete para confiabilidade
+- Lide com erros elegantemente através de rotas de backup apropriadas
+- Use variáveis de ambiente para dados sensíveis
+- Adicione registros aos blocos de Função para depuração
+
+### Otimize o desempenho
+- Minimize chamadas a APIs externas quando possível
+- Use execução paralela para operações independentes
+- Armazene resultados em cache com blocos de Memória quando apropriado
+
+### Monitore as execuções
+- Revise os registros regularmente para entender padrões de desempenho
+- Acompanhe os custos por uso de modelos de IA
+- Use instantâneos de fluxo de trabalho para depurar problemas
+
+## O que vem a seguir?
+
+Comece com [Fundamentos de execução](/execution/basics) para entender como os fluxos de trabalho funcionam, depois explore [Registro](/execution/logging) para monitorar suas execuções e [Cálculo de custos](/execution/costs) para otimizar seus gastos.

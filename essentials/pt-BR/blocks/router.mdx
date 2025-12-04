@@ -1,0 +1,225 @@
+---
+title: Roteador
+---
+
+import { Callout } from 'fumadocs-ui/components/callout'
+import { Step, Steps } from 'fumadocs-ui/components/steps'
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion'
+import { Image } from '@/components/ui/image'
+import { Video } from '@/components/ui/video'
+
+O bloco Roteador utiliza IA para decidir de forma inteligente qual caminho seu fluxo de trabalho deve seguir, direcionando a execução do fluxo de trabalho de acordo com condições ou lógica específicas. Diferente dos blocos de Condição que utilizam regras simples, os blocos Roteador podem entender o contexto e tomar decisões inteligentes de roteamento baseadas na análise de conteúdo.
+
+<div className="flex justify-center">
+  <Image
+    src="/static/blocks/router.png"
+    alt="Bloco Roteador com múltiplos caminhos"
+    width={500}
+    height={400}
+    className="my-6"
+  />
+</div>
+
+## Visão geral
+
+O bloco Roteador permite:
+
+<Steps>
+  <Step>
+    <strong>Roteamento inteligente de conteúdo</strong>: Usa IA para entender a intenção e o contexto
+  </Step>
+  <Step>
+    <strong>Seleção dinâmica de rotas</strong>: Direciona fluxos de trabalho baseados em análise de conteúdo não estruturado
+  </Step>
+  <Step>
+    <strong>Decisões conscientes do contexto</strong>: Toma decisões inteligentes de roteamento além de regras simples
+  </Step>
+  <Step>
+    <strong>Gerenciamento de múltiplas rotas</strong>: Lida com fluxos de trabalho complexos com múltiplos destinos potenciais
+  </Step>
+</Steps>
+
+## Roteador vs blocos de Condição
+
+<Accordions>
+  <Accordion title="Quando usar Roteador">
+    - É necessário análise de conteúdo impulsionada por IA
+    - Conteúdo não estruturado ou tipos de conteúdo variáveis
+    - Roteamento baseado em intenção (ex.: "direcionar tickets de suporte para departamentos")
+    - É necessária tomada de decisão consciente do contexto
+  </Accordion>
+  <Accordion title="Quando usar Condição">
+    - Decisões simples baseadas em regras
+    - Dados estruturados ou comparações numéricas
+    - É necessário roteamento rápido e determinístico
+    - Lógica booleana suficiente
+  </Accordion>
+</Accordions>
+
+## Como funciona
+
+O bloco Roteador:
+
+<Steps>
+  <Step>
+    <strong>Analisa o conteúdo</strong>: Utiliza um LLM para entender o conteúdo e o contexto de entrada
+  </Step>
+  <Step>
+    <strong>Avalia objetivos</strong>: Compara o conteúdo com os blocos de destino disponíveis
+  </Step>
+  <Step>
+    <strong>Seleciona o destino</strong>: Identifica a rota mais apropriada baseada na intenção
+  </Step>
+  <Step>
+    <strong>Executa o roteamento</strong>: Direciona o fluxo de trabalho ao bloco selecionado
+  </Step>
+</Steps>
+
+## Opções de configuração
+
+### Conteúdo/Prompt
+
+O conteúdo ou prompt que o Roteador analisará para tomar decisões de roteamento. Isso pode ser:
+
+- Uma consulta ou entrada direta do usuário
+- Resultado de um bloco anterior
+- Uma mensagem gerada pelo sistema
+
+### Blocos de destino
+
+Os possíveis blocos de destino entre os quais o Roteador pode selecionar. O Roteador detectará automaticamente os blocos conectados, mas você também pode:
+
+- Personalizar as descrições dos blocos de destino para melhorar a precisão do roteamento
+- Especificar critérios de roteamento para cada bloco de destino
+- Excluir certos blocos para que não sejam considerados como destinos de roteamento
+
+### Seleção de modelo
+
+Escolha um modelo de IA para impulsionar a decisão de roteamento:
+
+**OpenAI**: GPT-4o, o1, o3, o4-mini, gpt-4.1  \
+**Anthropic**: Claude 3.7 Sonnet \
+**Google**: Gemini 2.5 Pro, Gemini 2.0 Flash \
+**Outros provedores**: Groq, Cerebras, xAI, DeepSeek \
+**Modelos locais**: Qualquer modelo executando no Ollama 
+
+<div className="w-full max-w-2xl mx-auto overflow-hidden rounded-lg">
+  <Video src="router-model-dropdown.mp4" width={500} height={350} />
+</div>
+
+**Recomendação**: Use modelos com fortes capacidades de raciocínio como GPT-4o ou Claude 3.7 Sonnet para decisões de roteamento mais precisas.
+
+### Chave API
+
+Sua chave API para o provedor de LLM selecionado. Esta é armazenada de forma segura e utilizada para autenticação.
+
+### Acesso aos resultados
+
+Depois que um roteador toma uma decisão, você pode acessar seus resultados:
+
+- **`<router.prompt>`**: Resumo do prompt de roteamento utilizado
+- **`<router.selected_path>`**: Detalhes do bloco de destino escolhido
+- **`<router.tokens>`**: Estatísticas de uso de tokens do LLM
+- **`<router.cost>`**: Resumo de custos para a chamada de roteamento (entrada, saída, total)
+- **`<router.model>`**: O modelo utilizado para a tomada de decisões
+
+## Funcionalidades avançadas
+
+### Critérios de roteamento personalizados
+
+Defina critérios específicos para cada bloco de destino:
+
+```javascript
+// Example routing descriptions
+Target Block 1: "Technical support issues, API problems, integration questions"
+Target Block 2: "Billing inquiries, subscription changes, payment issues"
+Target Block 3: "General questions, feedback, feature requests"
+```
+
+## Entradas e saídas
+
+<Tabs items={['Configuração', 'Variáveis']}>
+  <Tab>
+    <ul className="list-disc space-y-2 pl-6">
+      <li>
+        <strong>Conteúdo/Prompt</strong>: Texto a analisar para decisões de roteamento
+      </li>
+      <li>
+        <strong>Blocos de destino</strong>: Blocos conectados como destinos potenciais
+      </li>
+      <li>
+        <strong>Modelo</strong>: Modelo de IA para análise de roteamento
+      </li>
+      <li>
+        <strong>Chave API</strong>: Autenticação para o provedor LLM selecionado
+      </li>
+    </ul>
+  </Tab>
+  <Tab>
+    <ul className="list-disc space-y-2 pl-6">
+      <li>
+        <strong>router.prompt</strong>: Resumo do prompt de roteamento utilizado
+      </li>
+      <li>
+        <strong>router.selected_path</strong>: Detalhes do destino escolhido
+      </li>
+      <li>
+        <strong>router.tokens</strong>: Estatísticas de uso de tokens
+      </li>
+      <li>
+        <strong>router.cost</strong>: Resumo de custos para a chamada de roteamento (entrada, saída, total)
+      </li>
+      <li>
+        <strong>router.model</strong>: Modelo utilizado para a tomada de decisões
+      </li>
+    </ul>
+  </Tab>
+</Tabs>
+
+## Exemplos de casos de uso
+
+### Classificação de suporte ao cliente
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">Cenário: Rotear tickets de suporte para departamentos especializados</h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>O usuário envia uma solicitação de suporte através de um formulário</li>
+    <li>O roteador analisa o conteúdo e contexto do ticket</li>
+    <li>Problemas técnicos → Agente de suporte de engenharia</li>
+    <li>Perguntas de faturamento → Agente de suporte financeiro</li>
+  </ol>
+</div>
+
+### Classificação de conteúdo
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">Cenário: Classificar e rotear conteúdo gerado por usuários</h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>O usuário envia conteúdo ou comentários</li>
+    <li>O roteador analisa o tipo de conteúdo e o sentimento</li>
+    <li>Solicitações de funcionalidades → Fluxo de trabalho da equipe de produto</li>
+    <li>Relatórios de erros → Fluxo de trabalho de suporte técnico</li>
+  </ol>
+</div>
+
+### Qualificação de leads
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">Cenário: Rotear leads de acordo com critérios de qualificação</h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>Informações do lead capturadas de um formulário</li>
+    <li>O roteador analisa o tamanho da empresa, indústria e necessidades</li>
+    <li>Leads empresariais → Equipe de vendas com preços personalizados</li>
+    <li>Leads de PMEs → Fluxo de integração self-service</li>
+  </ol>
+</div>
+
+## Melhores práticas
+
+- **Fornecer descrições claras de destino**: Ajude o roteador a entender quando selecionar cada destino com descrições específicas e detalhadas
+- **Usar critérios de roteamento específicos**: Defina condições claras e exemplos para cada rota para melhorar a precisão
+- **Implementar rotas alternativas**: Conecte um destino padrão para quando nenhuma rota específica for apropriada
+- **Testar com entradas diversas**: Certifique-se de que o roteador lida com vários tipos de entrada, casos extremos e conteúdo inesperado
+- **Monitorar o desempenho do roteamento**: Revise as decisões de roteamento regularmente e refine os critérios baseando-se em padrões de uso reais
+- **Escolher modelos apropriados**: Utilize modelos com fortes capacidades de raciocínio para decisões de roteamento complexas

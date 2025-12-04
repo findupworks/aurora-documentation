@@ -1,0 +1,242 @@
+---
+title: Condição
+---
+
+import { Callout } from 'fumadocs-ui/components/callout'
+import { Step, Steps } from 'fumadocs-ui/components/steps'
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion'
+import { Image } from '@/components/ui/image'
+
+O bloco de Condição permite ramificar a rota de execução do seu fluxo de trabalho baseando-se em expressões booleanas, permitindo criar fluxos de trabalho dinâmicos e responsivos com diferentes rotas de execução. Ele avalia condições e direciona o fluxo de trabalho consequentemente, permitindo controlar o fluxo de execução baseado em dados ou lógica sem requerer um LLM.
+
+<div className="flex justify-center">
+  <Image
+    src="/static/blocks/condition.png"
+    alt="Bloco de Condição"
+    width={500}
+    height={350}
+    className="my-6"
+  />
+</div>
+
+<Callout>
+  Os blocos de Condição permitem uma tomada de decisão determinística sem requerer um LLM, tornando-os ideais
+  para lógica de ramificação simples.
+</Callout>
+
+## Visão geral
+
+O bloco de Condição permite:
+
+<Steps>
+  <Step>
+    <strong>Criar lógica de ramificação</strong>: direcionar fluxos de trabalho baseados em expressões booleanas
+  </Step>
+  <Step>
+    <strong>Tomar decisões baseadas em dados</strong>: avaliar condições usando saídas de blocos anteriores
+  </Step>
+  <Step>
+    <strong>Lidar com múltiplos cenários</strong>: definir múltiplas condições com diferentes rotas
+  </Step>
+  <Step>
+    <strong>Fornecer roteamento determinístico</strong>: tomar decisões sem requerer um LLM
+  </Step>
+</Steps>
+
+## Como funciona
+
+O bloco de Condição opera através de um processo de avaliação sequencial:
+
+1. **Avaliar expressão** - Processa a expressão booleana de JavaScript/TypeScript usando os dados atuais do fluxo de trabalho
+2. **Determinar resultado** - Retorna verdadeiro ou falso baseado na avaliação da expressão
+3. **Direcionar fluxo de trabalho** - Direciona a execução ao bloco de destino apropriado baseado no resultado  
+4. **Fornecer contexto** - Gera metadados sobre a decisão para depuração e monitoramento
+
+## Opções de configuração
+
+### Condições
+
+Defina uma ou mais condições que serão avaliadas. Cada condição inclui:
+
+- **Expressão**: uma expressão JavaScript/TypeScript que avalia a verdadeiro ou falso
+- **Rota**: o bloco de destino para o qual direcionar se a condição for verdadeira
+- **Descrição**: explicação opcional do que a condição verifica
+
+Você pode criar múltiplas condições que são avaliadas em ordem, onde a primeira condição que corresponder determina a rota de execução.
+
+### Formato de expressão de condição
+
+As condições utilizam sintaxe JavaScript e podem fazer referência a valores de entrada de blocos anteriores.
+
+<Tabs items={['Limiar de pontuação', 'Análise de texto', 'Múltiplas condições']}>
+  <Tab>
+
+    ```javascript
+    // Check if a score is above a threshold
+    <agent.score> > 75
+    ```
+
+  </Tab>
+  <Tab>
+
+    ```javascript
+    // Check if a text contains specific keywords
+    <agent.text>.includes('urgent') || <agent.text>.includes('emergency')
+    ```
+
+  </Tab>
+  <Tab>
+
+    ```javascript
+    // Check multiple conditions
+    <agent.age> >= 18 && <agent.country> === 'US'
+    ```
+
+  </Tab>
+</Tabs>
+
+### Acesso aos resultados
+
+Depois de avaliar uma condição, você pode acessar suas saídas:
+
+- **`<condition.result>`**: Resultado booleano da avaliação da condição
+- **`<condition.matched_condition>`**: ID da condição que correspondeu
+- **`<condition.content>`**: Descrição do resultado da avaliação
+- **`<condition.path>`**: Detalhes do destino de roteamento escolhido
+
+## Funcionalidades avançadas
+
+### Expressões complexas
+
+Use operadores e funções de JavaScript nas condições:
+
+```javascript
+// String operations
+<user.email>.endsWith('@company.com')
+
+// Array operations
+<api.tags>.includes('urgent')
+
+// Mathematical operations
+<agent.confidence> * 100 > 85
+
+// Date comparisons
+new Date(<api.created_at>) > new Date('2024-01-01')
+```
+
+### Avaliação de múltiplas condições
+
+As condições são avaliadas em ordem até que uma corresponda:
+
+```javascript
+// Condition 1: Check for high priority
+<ticket.priority> === 'high'
+
+// Condition 2: Check for urgent keywords
+<ticket.subject>.toLowerCase().includes('urgent')
+
+// Condition 3: Default fallback
+true
+```
+
+### Tratamento de erros
+
+As condições lidam automaticamente com:
+- Valores indefinidos ou nulos com avaliação segura
+- Incompatibilidades de tipo com alternativas apropriadas
+- Expressões inválidas com registro de erros
+- Variáveis faltantes com valores padrão
+
+## Entradas e saídas
+
+<Tabs items={['Configuração', 'Variáveis', 'Resultados']}>
+  <Tab>
+    <ul className="list-disc space-y-2 pl-6">
+      <li>
+        <strong>Condições</strong>: Array de expressões booleanas para avaliar
+      </li>
+      <li>
+        <strong>Expressões</strong>: Condições JavaScript/TypeScript usando saídas de blocos
+      </li>
+      <li>
+        <strong>Rotas de roteamento</strong>: Blocos de destino para cada resultado de condição
+      </li>
+    </ul>
+  </Tab>
+  <Tab>
+    <ul className="list-disc space-y-2 pl-6">
+      <li>
+        <strong>condition.result</strong>: Resultado booleano da avaliação de condição
+      </li>
+      <li>
+        <strong>condition.matched_condition</strong>: ID da condição correspondente
+      </li>
+      <li>
+        <strong>condition.content</strong>: Descrição do resultado de avaliação
+      </li>
+      <li>
+        <strong>condition.path</strong>: Detalhes do destino de roteamento escolhido
+      </li>
+    </ul>
+  </Tab>
+  <Tab>
+    <ul className="list-disc space-y-2 pl-6">
+      <li>
+        <strong>Resultado booleano</strong>: Resultado principal da avaliação de condição
+      </li>
+      <li>
+        <strong>Informações de roteamento</strong>: Seleção de rota e detalhes de condição
+      </li>
+      <li>
+        <strong>Acesso</strong>: Disponível em blocos após a condição
+      </li>
+    </ul>
+  </Tab>
+</Tabs>
+
+## Exemplos de casos de uso
+
+### Roteamento de atendimento ao cliente
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">Cenário: Rotear tickets de suporte de acordo com a prioridade</h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>O bloco API obtém dados de tickets de suporte</li>
+    <li>A condição verifica se `<api.priority>` é igual a 'high'</li>
+    <li>Tickets de alta prioridade → Agente com ferramentas de escalonamento</li>
+    <li>Tickets de prioridade normal → Agente de suporte padrão</li>
+  </ol>
+</div>
+
+### Moderação de conteúdo
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">Cenário: Filtrar conteúdo baseado em resultados de análise</h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>O agente analisa conteúdo gerado por usuários</li>
+    <li>A condição verifica se `<agent.toxicity_score>` > 0.7</li>
+    <li>Conteúdo tóxico → Fluxo de moderação</li>
+    <li>Conteúdo limpo → Fluxo de publicação</li>
+  </ol>
+</div>
+
+### Fluxo de integração de usuários
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">Cenário: Personalizar a integração de acordo com o tipo de usuário</h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>O bloco de função processa dados de registro de usuários</li>
+    <li>A condição verifica se `<user.account_type>` === 'enterprise'</li>
+    <li>Usuários empresariais → Fluxo de configuração avançada</li>
+    <li>Usuários individuais → Fluxo de integração simples</li>
+  </ol>
+</div>
+
+## Melhores práticas
+
+- **Ordene as condições corretamente**: Coloque as condições mais específicas antes das gerais para garantir que a lógica específica tenha prioridade sobre as alternativas
+- **Inclua uma condição padrão**: Adicione uma condição geral (`true`) como última condição para lidar com casos não correspondentes e evitar que a execução do fluxo de trabalho fique travada
+- **Mantenha as expressões simples**: Use expressões booleanas claras e diretas para melhorar a legibilidade e facilitar a depuração
+- **Documente suas condições**: Adicione descrições para explicar o propósito de cada condição para melhor colaboração em equipe e manutenção
+- **Teste casos limite**: Verifique que as condições lidem corretamente com valores limite testando com valores nos extremos dos intervalos das suas condições
