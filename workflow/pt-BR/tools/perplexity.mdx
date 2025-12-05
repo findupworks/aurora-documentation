@@ -1,0 +1,68 @@
+---
+title: Perplexity
+description: Usar os modelos de chat do Perplexity AI
+---
+
+import { BlockInfoCard } from "/snippets/block-info-card.jsx";
+
+<BlockInfoCard
+  type="perplexity"
+  color="#20808D"
+  icon={true}
+  iconSvg={`<svg className="block-icon"   viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' >
+      <path
+        d='M19.785 0v7.272H22.5V17.62h-2.935V24l-7.037-6.194v6.145h-1.091v-6.152L4.392 24v-6.465H1.5V7.188h2.884V0l7.053 6.494V.19h1.09v6.49L19.786 0zm-7.257 9.044v7.319l5.946 5.234V14.44l-5.946-5.397zm-1.099-.08l-5.946 5.398v7.235l5.946-5.234V8.965zm8.136 7.58h1.844V8.349H13.46l6.105 5.54v2.655zm-8.982-8.28H2.59v8.195h1.8v-2.576l6.192-5.62zM5.475 2.476v4.71h5.115l-5.115-4.71zm13.219 0l-5.115 4.71h5.115v-4.71z'
+        fill='currentColor'
+        fillRule='nonzero'
+      />
+    </svg>`}
+/>
+
+{/* MANUAL-CONTENT-START:intro */}
+[Perplexity AI](https://www.perplexity.ai) é um motor de busca e respostas impulsionado por IA que combina as capacidades de grandes modelos de linguagem com buscas web em tempo real para fornecer informações precisas e atualizadas, bem como respostas completas a perguntas complexas.
+
+Com o Perplexity AI, você pode:
+
+- **Obter respostas precisas**: Receber respostas completas a perguntas com citações de fontes confiáveis
+- **Acessar informações em tempo real**: Obter informações atualizadas através das capacidades de busca web do Perplexity
+- **Explorar tópicos em profundidade**: Aprofundar-se em tópicos com perguntas de acompanhamento e informações relacionadas
+- **Verificar informações**: Verificar a credibilidade das respostas através das fontes e referências fornecidas
+- **Gerar conteúdo**: Criar resumos, análises e conteúdo criativo baseado em informações atuais
+- **Pesquisar eficientemente**: Agilizar processos de pesquisa com respostas completas a consultas complexas
+- **Interagir conversacionalmente**: Participar de diálogos naturais para refinar perguntas e explorar tópicos
+
+No Sim, a integração do Perplexity permite que seus agentes aproveitem essas capacidades poderosas de IA de forma programática como parte dos seus fluxos de trabalho. Isso permite cenários de automação sofisticados que combinam compreensão de linguagem natural, recuperação de informações em tempo real e geração de conteúdo. Seus agentes podem formular consultas, receber respostas completas com citações e incorporar essas informações em seus processos de tomada de decisão ou resultados. Esta integração fecha a lacuna entre a automação do seu fluxo de trabalho e o acesso a informações atuais e confiáveis, permitindo que seus agentes tomem decisões mais informadas e forneçam respostas mais precisas. Ao conectar o Aurora Workflow com o Perplexity, você pode criar agentes que se mantenham atualizados com as informações mais recentes, forneçam respostas bem pesquisadas e entreguem insights mais valiosos aos usuários - tudo sem exigir pesquisa manual ou coleta de informações.
+{/* MANUAL-CONTENT-END */}
+
+## Instruções de uso
+
+Integre o Perplexity no fluxo de trabalho. Pode gerar completions usando os modelos de chat do Perplexity AI. Requer chave API.
+
+## Ferramentas
+
+### `perplexity_chat`
+
+Gera completions usando os modelos de chat do Perplexity AI
+
+#### Entrada
+
+| Parâmetro      | Tipo   | Obrigatório | Descrição                                                       |
+| -------------- | ------ | ----------- | --------------------------------------------------------------- |
+| `systemPrompt` | string | Não         | Instrução do sistema para guiar o comportamento do modelo       |
+| `content`      | string | Sim         | O conteúdo da mensagem do usuário para enviar ao modelo         |
+| `model`        | string | Sim         | Modelo a usar para os completions de chat (ex.: sonar, mistral) |
+| `max_tokens`   | number | Não         | Número máximo de tokens a gerar                                 |
+| `temperature`  | number | Não         | Temperatura de amostragem entre 0 e 1                           |
+| `apiKey`       | string | Sim         | Chave API do Perplexity                                         |
+
+#### Saída
+
+| Parâmetro | Tipo    | Descrição                        |
+| --------- | ------- | -------------------------------- |
+| `success` | boolean | Status de sucesso da operação    |
+| `output`  | object  | Resultados do completion de chat |
+
+## Notas
+
+- Categoria: `tools`
+- Tipo: `perplexity`

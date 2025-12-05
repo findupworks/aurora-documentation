@@ -1,0 +1,95 @@
+---
+title: Espera
+---
+
+O bloco Espera pausa seu fluxo de trabalho durante um tempo específico antes de continuar com o próximo bloco. Use-o para adicionar atrasos entre ações, respeitar limites de frequência de API ou espaçar operações.
+
+<div className="flex justify-center my-6">![wait](/images/wait.png)</div>
+
+## Visão Geral
+
+O bloco Espera permite:
+
+<Steps>
+  <Step>
+    <strong>Adicionar atrasos de tempo</strong>: Pausar a execução entre etapas
+    do fluxo de trabalho
+  </Step>
+  <Step>
+    <strong>Respeitar limites de frequência</strong>: Espaçar chamadas à API
+    para se manter dentro dos limites
+  </Step>
+  <Step>
+    <strong>Programar sequências</strong>: Criar fluxos de trabalho temporizados
+    com atrasos entre ações
+  </Step>
+</Steps>
+
+## Configuração
+
+### Quantidade de espera
+
+Insira a duração para pausar a execução:
+
+- **Entrada**: Número positivo
+- **Máximo**: 600 segundos (10 minutos) ou 10 minutos
+
+### Unidade
+
+Escolha a unidade de tempo:
+
+- **Segundos**: Para atrasos curtos e precisos
+- **Minutos**: Para pausas mais longas
+
+<Callout type="info">
+  Os blocos de espera podem ser cancelados parando o fluxo de trabalho. O tempo
+  máximo de espera é de 10 minutos.
+</Callout>
+
+## Saídas
+
+- **`<wait.waitDuration>`**: A duração da espera em milissegundos
+- **`<wait.status>`**: Estado da espera ('waiting', 'completed', ou 'cancelled')
+
+## Exemplos de casos de uso
+
+### Limitação de frequência de API
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">
+    Cenário: Manter-se dentro dos limites de frequência de API
+  </h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>O bloco API realiza a primeira solicitação</li>
+    <li>O bloco Espera pausa durante 2 segundos</li>
+    <li>O bloco API realiza a segunda solicitação</li>
+    <li>O processo continua sem atingir os limites de frequência</li>
+  </ol>
+</div>
+
+### Notificações temporizadas
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">Cenário: Enviar mensagens de acompanhamento</h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>A função envia o e-mail inicial</li>
+    <li>O bloco Espera pausa durante 5 minutos</li>
+    <li>A função envia o e-mail de acompanhamento</li>
+  </ol>
+</div>
+
+### Atrasos de processamento
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">Cenário: Espera para sistema externo</h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>O bloco API ativa um trabalho no sistema externo</li>
+    <li>O bloco de espera pausa durante 30 segundos</li>
+    <li>O bloco API verifica o estado de conclusão do trabalho</li>
+  </ol>
+</div>
+
+## Melhores práticas
+
+- **Manter esperas razoáveis**: Use Espera para atrasos de até 10 minutos. Para atrasos mais longos, considere fluxos de trabalho agendados
+- **Monitorar o tempo de execução**: Lembre-se de que as esperas estendem a duração total do fluxo de trabalho

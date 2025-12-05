@@ -1,0 +1,294 @@
+---
+title: Loop
+---
+
+O bloco Loop é um bloco contenedor no Aurora Workflow que permite criar fluxos de trabalho iterativos executando um grupo de blocos repetidamente. Os loops permitem o processamento iterativo nos seus fluxos de trabalho.
+
+<div className="flex justify-center my-6">![Loop](/images/loop.png)</div>
+
+O bloco Loop suporta quatro tipos de iteração:
+
+<Callout type="info">
+  Os blocos Loop são nós contenedores que podem abrigar outros blocos dentro
+  deles. Os blocos dentro de um loop serão executados múltiplas vezes de acordo
+  com sua configuração.
+</Callout>
+
+## Visão Geral
+
+O bloco Loop permite:
+
+<Steps>
+  <Step>
+    <strong>Iterar sobre coleções</strong>: Processar arrays ou objetos um
+    elemento por vez
+  </Step>
+  <Step>
+    <strong>Repetir operações</strong>: Executar blocos um número fixo de vezes
+  </Step>
+  <Step>
+    <strong>Loops com condições</strong>: Continuar executando enquanto ou até
+    que uma condição seja atendida
+  </Step>
+  <Step>
+    <strong>Agregar resultados</strong>: Coletar saídas de todas as iterações do
+    loop
+  </Step>
+</Steps>
+
+## Como funciona
+
+O bloco Loop executa os blocos contidos através de iteração sequencial:
+
+<Steps>
+  <Step>
+    **Inicializar loop** - Configurar parâmetros de iteração (contador ou
+    coleção)
+  </Step>
+  <Step>
+    **Executar iteração** - Executar blocos contidos para a iteração atual
+  </Step>
+  <Step>**Coletar resultados** - Armazenar a saída de cada iteração</Step>
+  <Step>
+    **Continuar ou completar** - Passar para a próxima iteração ou finalizar o
+    loop
+  </Step>
+</Steps>
+## Opções de configuração
+
+### Tipo de loop
+
+Escolha entre quatro tipos de loops:
+
+<Tabs items={['For Loop', 'ForEach Loop', 'While Loop', 'Do-While Loop']}>
+  <Tab title='For Loop'>
+    **Loop For (Iterações)** - Um loop numérico que executa um número fixo de vezes:
+    
+    <div className="flex justify-center">
+      <Image
+        src="/static/workflow/pt-BR/blocks/loop-1.png"
+        alt="Loop For com iterações"
+        width={500}
+        height={400}
+        className="my-6"
+      />
+    </div>
+    
+    Use quando precisar repetir uma operação um número específico de vezes.
+
+    ```
+    Example: Run 5 times
+    - Iteration 1
+    - Iteration 2
+    - Iteration 3
+    - Iteration 4
+    - Iteration 5
+    ```
+
+  </Tab>
+  <Tab title='ForEach Loop'>
+    **Loop ForEach (Coleção)** - Um loop baseado em coleções que itera sobre cada elemento em um array ou objeto:
+    
+    <div className="flex justify-center">
+      <Image
+        src="/static/workflow/pt-BR/blocks/loop-2.png"
+        alt="Loop ForEach com coleção"
+        width={500}
+        height={400}
+        className="my-6"
+      />
+    </div>
+    
+    Use quando precisar processar uma coleção de elementos.
+
+    ```
+    Example: Process ["apple", "banana", "orange"]
+    - Iteration 1: Process "apple"
+    - Iteration 2: Process "banana"
+    - Iteration 3: Process "orange"
+    ```
+
+  </Tab>
+  <Tab title='While Loop'>
+    **Loop While (Baseado em condição)** - Continua executando enquanto uma condição for avaliada como verdadeira:
+    
+    <div className="flex justify-center">
+      <Image
+        src="/static/workflow/pt-BR/blocks/loop-3.png"
+        alt="Loop While com condição"
+        width={500}
+        height={400}
+        className="my-6"
+      />
+    </div>
+    
+    Use quando precisar fazer um loop até que uma condição específica seja atendida. A condição é verificada **antes** de cada iteração.
+
+    ```
+    Example: While <variable.i> < 10
+    - Check condition → Execute if true
+    - Inside loop: Increment <variable.i>
+    - Inside loop: Variables assigns i = <variable.i> + 1
+    - Check condition → Execute if true
+    - Check condition → Exit if false
+    ```
+
+  </Tab>
+  <Tab title='Do-While Loop'>
+    **Loop Do-While (Baseado em condição)** - Executa pelo menos uma vez, depois continua enquanto uma condição for verdadeira:
+    
+    <div className="flex justify-center">
+      <Image
+        src="/static/workflow/pt-BR/blocks/loop-3.png"
+        alt="Loop Do-While com condição"
+        width={500}
+        height={400}
+        className="my-6"
+      />
+    </div>
+    
+    Use quando precisar executar pelo menos uma vez, depois fazer um loop até que uma condição seja atendida. A condição é verificada **depois** de cada iteração.
+
+    ```
+    Example: Do-while <variable.i> < 10
+    - Execute blocks
+    - Inside loop: Increment <variable.i>
+    - Inside loop: Variables assigns i = <variable.i> + 1
+    - Check condition → Continue if true
+    - Check condition → Exit if false
+    ```
+
+  </Tab>
+</Tabs>
+
+## Como usar os loops
+
+### Criando um loop
+
+1. Arraste um bloco Loop da barra de ferramentas para seu canvas
+2. Configure o tipo de loop e os parâmetros
+3. Arraste outros blocos dentro do contenedor do loop
+4. Conecte os blocos conforme necessário
+
+### Acesso aos resultados
+
+Depois que um loop é concluído, você pode acessar os resultados agregados:
+
+- **`<loop.results>`**: Array de resultados de todas as iterações do loop
+
+## Exemplos de casos de uso
+
+### Processamento de resultados de API
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">
+    Cenário: Processar múltiplos registros de clientes
+  </h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>O bloco API obtém a lista de clientes</li>
+    <li>O loop ForEach itera sobre cada cliente</li>
+    <li>Dentro do loop: O agente analisa os dados do cliente</li>
+    <li>Dentro do loop: A função armazena os resultados da análise</li>
+  </ol>
+</div>
+
+### Geração iterativa de conteúdo
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">Cenário: Gerar múltiplas variações</h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>Configurar loop For para 5 iterações</li>
+    <li>Dentro do loop: O agente gera uma variação de conteúdo</li>
+    <li>Dentro do loop: O avaliador pontua o conteúdo</li>
+    <li>Depois do loop: A função seleciona a melhor variação</li>
+  </ol>
+</div>
+
+### Contador com loop While
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">Cenário: Processar elementos com loop baseado em contador</h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>Inicializar variável de fluxo de trabalho: `i = 0`</li>
+    <li>Loop While com condição: `<variable.i>` &lt; 10</li>
+    <li>Dentro do loop: O agente processa o elemento no índice `<variable.i>`</li>
+    <li>Dentro do loop: A variável incrementa `i = <variable.i> + 1`</li>
+    <li>O loop continua enquanto i for menor que 10</li>
+  </ol>
+</div>
+
+## Características avançadas
+
+### Limitações
+
+<Callout type="warning">
+  Os blocos contenedores (Loops e Paralelos) não podem ser aninhados dentro de
+  outros. Isso significa: - Você não pode colocar um bloco de Loop dentro de
+  outro bloco de Loop - Você não pode colocar um bloco Paralelo dentro de um
+  bloco de Loop - Você não pode colocar nenhum bloco contenedor dentro de outro
+  bloco contenedor Se precisar de iteração multidimensional, considere
+  reestruturar seu fluxo de trabalho para usar loops sequenciais ou processar
+  dados por etapas.
+</Callout>
+
+<Callout type="info">
+  Os loops são executados sequencialmente, não em paralelo. Se precisar de
+  execução concorrente, use o bloco Paralelo.
+</Callout>
+
+## Entradas e saídas
+
+<Tabs items={["Configuração", "Variáveis", "Resultados"]}>
+  <Tab title="Configuração">
+    <ul>
+      <li>
+        <strong>Tipo de loop</strong>: Escolha entre 'for', 'forEach', 'while',
+        ou 'doWhile'
+      </li>
+      <li>
+        <strong>Iterações</strong>: Número de vezes a executar (loops for)
+      </li>
+      <li>
+        <strong>Coleção</strong>: Array ou objeto sobre o qual iterar (loops
+        forEach)
+      </li>
+      <li>
+        <strong>Condição</strong>: Expressão booleana a avaliar (loops
+        while/do-while)
+      </li>
+    </ul>
+  </Tab>
+  <Tab title="Variáveis">
+    <ul>
+      <li>
+        <strong>loop.currentItem</strong>: Elemento atual que está sendo
+        processado
+      </li>
+      <li>
+        <strong>loop.index</strong>: Número da iteração atual (base 0)
+      </li>
+      <li>
+        <strong>loop.items</strong>: Coleção completa (loops forEach)
+      </li>
+    </ul>
+  </Tab>
+  <Tab title="Resultados">
+    <ul>
+      <li>
+        <strong>loop.results</strong>: Array de todos os resultados de iteração
+      </li>
+      <li>
+        <strong>Estrutura</strong>: Os resultados mantêm a ordem de iteração
+      </li>
+      <li>
+        <strong>Acesso</strong>: Disponível em blocos após o loop
+      </li>
+    </ul>
+  </Tab>
+</Tabs>
+
+## Melhores práticas
+
+- **Estabelecer limites razoáveis**: Mantenha o número de iterações razoável para evitar tempos de execução longos
+- **Usar ForEach para coleções**: Ao processar arrays ou objetos, use loops ForEach em vez de loops For
+- **Lidar com erros elegantemente**: Considere adicionar tratamento de erros dentro dos loops para fluxos de trabalho robustos

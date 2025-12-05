@@ -11,138 +11,284 @@
   "navigation": {
     "languages": [
       {
-        "language": "en",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": ["en/index"]
-          }
-        ]
-      },
-      {
-        "language": "es",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": ["es/index"]
-          }
-        ]
-      },
-      {
         "language": "pt-BR",
-        "groups": [
+        "tabs": [
           {
-            "group": "Getting started",
-            "pages": ["pt-BR/index"]
-          }
-        ]
-      }
-    ],
-    "tabs": [
-      {
-        "tab": "Aurora",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": ["index", "quickstart", "development"]
-          },
-          {
-            "group": "Customization",
-            "pages": ["essentials/settings", "essentials/navigation"]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+            "tab": "Geral",
+            "groups": [
+              {
+                "group": "Getting Started",
+                "pages": ["geral/pt-BR/introduction"]
+              },
+              {
+                "group": "Builders",
+                "pages": [
+                  "geral/pt-BR/builders/agent",
+                  "geral/pt-BR/builders/workflow",
+                  "geral/pt-BR/builders/flow"
+                ]
+              },
+              {
+                "group": "Chat",
+                "pages": [
+                  "geral/pt-BR/chat/introduction",
+                  "geral/pt-BR/chat/chat-ai",
+                  "geral/pt-BR/chat/conversing",
+                  "geral/pt-BR/chat/api",
+                  "geral/pt-BR/chat/embed",
+                  "geral/pt-BR/chat/history",
+                  "geral/pt-BR/chat/monitoring",
+                  "geral/pt-BR/chat/tools",
+                  "geral/pt-BR/chat/web"
+                ]
+              },
+              {
+                "group": "Documents",
+                "pages": [
+                  "geral/pt-BR/documents/introduction",
+                  "geral/pt-BR/documents/collections",
+                  "geral/pt-BR/documents/upload",
+
+                  "geral/pt-BR/documents/optimization"
+                ]
+              },
+              {
+                "group": "Admin",
+                "pages": [
+                  "geral/pt-BR/admin/dashboard",
+                  "geral/pt-BR/admin/users",
+                  "geral/pt-BR/admin/invitations",
+                  "geral/pt-BR/teams/members",
+                  "geral/pt-BR/admin/files",
+                  "geral/pt-BR/admin/prompts",
+                  "geral/pt-BR/admin/agents"
+                ]
+              }
             ]
           },
           {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Agentes",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": ["index", "quickstart", "development"]
-          },
-          {
-            "group": "Customization",
-            "pages": ["essentials/settings", "essentials/navigation"]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Agentes",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": ["index", "quickstart", "development"]
-          },
-          {
-            "group": "Customization",
-            "pages": ["essentials/settings", "essentials/navigation"]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+            "tab": "Agentes",
+            "groups": [
+              {
+                "group": "Getting Started",
+                "pages": ["agent/pt-BR/index"]
+              },
+              {
+                "group": "Criando e Configurando",
+                "pages": [
+                  "agent/pt-BR/creating-editing",
+                  "agent/pt-BR/personality",
+                  "agent/pt-BR/knowledge",
+                  "agent/pt-BR/fields-reference"
+                ]
+              },
+              {
+                "group": "Canais",
+                "pages": [
+                  "agent/pt-BR/channels",
+                  "agent/pt-BR/channels-detailed"
+                ]
+              },
+              {
+                "group": "Conversas e Análises",
+                "pages": ["agent/pt-BR/conversations", "agent/pt-BR/analytics"]
+              },
+              {
+                "group": "Testes",
+                "pages": ["agent/pt-BR/testing"]
+              }
             ]
           },
           {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+            "tab": "Workflow",
+            "groups": [
+              {
+                "group": "Getting Started",
+                "pages": [
+                  "workflow/pt-BR/introduction/index",
+                  "workflow/pt-BR/getting-started/index"
+                ]
+              },
+              {
+                "group": "Triggers",
+                "pages": [
+                  "workflow/pt-BR/triggers/index",
+                  "workflow/pt-BR/triggers/api",
+                  "workflow/pt-BR/triggers/chat",
+                  "workflow/pt-BR/triggers/input-form",
+                  "workflow/pt-BR/triggers/manual",
+                  "workflow/pt-BR/triggers/schedule",
+                  "workflow/pt-BR/triggers/webhook"
+                ]
+              },
+              {
+                "group": "Blocks",
+                "pages": [
+                  "workflow/pt-BR/blocks/index",
+                  "workflow/pt-BR/blocks/agent",
+                  "workflow/pt-BR/blocks/api",
+                  "workflow/pt-BR/blocks/condition",
+                  "workflow/pt-BR/blocks/evaluator",
+                  "workflow/pt-BR/blocks/function",
+                  "workflow/pt-BR/blocks/guardrails",
+                  "workflow/pt-BR/blocks/loop",
+                  "workflow/pt-BR/blocks/parallel",
+                  "workflow/pt-BR/blocks/response",
+                  "workflow/pt-BR/blocks/router",
+                  "workflow/pt-BR/blocks/variables",
+                  "workflow/pt-BR/blocks/wait",
+                  "workflow/pt-BR/blocks/workflow"
+                ]
+              },
+              {
+                "group": "Tools",
+                "pages": [
+                  "workflow/pt-BR/tools/index",
+                  "workflow/pt-BR/tools/browser_use",
+                  "workflow/pt-BR/tools/clay",
+                  "workflow/pt-BR/tools/confluence",
+                  "workflow/pt-BR/tools/discord",
+                  "workflow/pt-BR/tools/elevenlabs",
+                  "workflow/pt-BR/tools/exa",
+                  "workflow/pt-BR/tools/file",
+                  "workflow/pt-BR/tools/firecrawl",
+                  "workflow/pt-BR/tools/generic_webhook",
+                  "workflow/pt-BR/tools/github",
+                  "workflow/pt-BR/tools/gmail",
+                  "workflow/pt-BR/tools/google_calendar",
+                  "workflow/pt-BR/tools/google_docs",
+                  "workflow/pt-BR/tools/google_drive",
+                  "workflow/pt-BR/tools/google_forms",
+                  "workflow/pt-BR/tools/google_search",
+                  "workflow/pt-BR/tools/google_sheets",
+                  "workflow/pt-BR/tools/google_vault",
+                  "workflow/pt-BR/tools/huggingface",
+                  "workflow/pt-BR/tools/hunter",
+                  "workflow/pt-BR/tools/image_generator",
+                  "workflow/pt-BR/tools/jina",
+                  "workflow/pt-BR/tools/jira",
+                  "workflow/pt-BR/tools/knowledge",
+                  "workflow/pt-BR/tools/linear",
+                  "workflow/pt-BR/tools/linkup",
+                  "workflow/pt-BR/tools/mcp",
+                  "workflow/pt-BR/tools/mem0",
+                  "workflow/pt-BR/tools/memory",
+                  "workflow/pt-BR/tools/microsoft_excel",
+                  "workflow/pt-BR/tools/microsoft_planner",
+                  "workflow/pt-BR/tools/microsoft_teams",
+                  "workflow/pt-BR/tools/mistral_parse",
+                  "workflow/pt-BR/tools/mongodb",
+                  "workflow/pt-BR/tools/mysql",
+                  "workflow/pt-BR/tools/notion",
+                  "workflow/pt-BR/tools/onedrive",
+                  "workflow/pt-BR/tools/openai",
+                  "workflow/pt-BR/tools/outlook",
+                  "workflow/pt-BR/tools/parallel_ai",
+                  "workflow/pt-BR/tools/perplexity",
+                  "workflow/pt-BR/tools/pinecone",
+                  "workflow/pt-BR/tools/postgresql",
+                  "workflow/pt-BR/tools/qdrant",
+                  "workflow/pt-BR/tools/reddit",
+                  "workflow/pt-BR/tools/resend",
+                  "workflow/pt-BR/tools/s3",
+                  "workflow/pt-BR/tools/schedule",
+                  "workflow/pt-BR/tools/serper",
+                  "workflow/pt-BR/tools/sharepoint",
+                  "workflow/pt-BR/tools/slack",
+                  "workflow/pt-BR/tools/sms",
+                  "workflow/pt-BR/tools/stagehand",
+                  "workflow/pt-BR/tools/stagehand_agent",
+                  "workflow/pt-BR/tools/supabase",
+                  "workflow/pt-BR/tools/tavily",
+                  "workflow/pt-BR/tools/telegram",
+                  "workflow/pt-BR/tools/thinking",
+                  "workflow/pt-BR/tools/translate",
+                  "workflow/pt-BR/tools/twilio_sms",
+                  "workflow/pt-BR/tools/typeform",
+                  "workflow/pt-BR/tools/vision",
+                  "workflow/pt-BR/tools/wealthbox",
+                  "workflow/pt-BR/tools/webflow",
+                  "workflow/pt-BR/tools/webhook",
+                  "workflow/pt-BR/tools/whatsapp",
+                  "workflow/pt-BR/tools/wikipedia",
+                  "workflow/pt-BR/tools/x",
+                  "workflow/pt-BR/tools/youtube",
+                  "workflow/pt-BR/tools/zep"
+                ]
+              },
+              {
+                "group": "Connections",
+                "pages": [
+                  "workflow/pt-BR/connections/index",
+                  "workflow/pt-BR/connections/basics",
+                  "workflow/pt-BR/connections/data-structure",
+                  "workflow/pt-BR/connections/tags"
+                ]
+              },
+              {
+                "group": "MCP",
+                "pages": ["workflow/pt-BR/mcp/index"]
+              },
+              {
+                "group": "Copilot",
+                "pages": ["workflow/pt-BR/copilot/index"]
+              },
+              {
+                "group": "Knowledgebase",
+                "pages": [
+                  "workflow/pt-BR/knowledgebase/index",
+                  "workflow/pt-BR/knowledgebase/tags"
+                ]
+              },
+              {
+                "group": "Variables",
+                "pages": [
+                  "workflow/pt-BR/variables/workflow-variables",
+                  "workflow/pt-BR/variables/environment-variables"
+                ]
+              },
+              {
+                "group": "Execution",
+                "pages": [
+                  "workflow/pt-BR/execution/index",
+                  "workflow/pt-BR/execution/basics",
+                  "workflow/pt-BR/execution/api",
+                  "workflow/pt-BR/execution/logging",
+                  "workflow/pt-BR/execution/costs"
+                ]
+              },
+              {
+                "group": "Permissions",
+                "pages": ["workflow/pt-BR/permissions/roles-and-permissions"]
+              },
+              {
+                "group": "SDKs",
+                "pages": [
+                  "workflow/pt-BR/sdks/python",
+                  "workflow/pt-BR/sdks/typescript"
+                ]
+              }
             ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": ["api-reference/introduction"]
           },
           {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+            "tab": "Flow"
+          },
+          {
+            "tab": "API Reference",
+            "groups": [
+              {
+                "group": "API Documentation",
+                "pages": ["api-reference/introduction"]
+              },
+              {
+                "group": "Endpoints",
+                "pages": [
+                  "api-reference/endpoint/get",
+                  "api-reference/endpoint/create",
+                  "api-reference/endpoint/delete",
+                  "api-reference/endpoint/webhook"
+                ]
+              }
             ]
           }
         ]
@@ -171,13 +317,13 @@
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:aurora@aurora-ai.co"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Platform",
+      "href": "https://app.aurora-ai.co"
     }
   },
   "contextual": {
@@ -194,9 +340,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "instagram": "https://x.com/auroraai",
+      "linkedin": "https://linkedin.com/company/findup"
     }
   }
 }

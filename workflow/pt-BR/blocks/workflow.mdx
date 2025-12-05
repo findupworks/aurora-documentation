@@ -1,0 +1,32 @@
+---
+title: Bloco de fluxo de trabalho
+description: Executa outro fluxo de trabalho dentro do fluxo atual
+---
+
+<div className="flex justify-center my-6">
+  ![workflow](/images/workflow.png)
+</div>
+
+## O que faz
+
+Coloque um bloco de Fluxo de trabalho quando quiser chamar um fluxo de trabalho secundário como parte de um fluxo maior. O bloco executa a última versão implementada desse fluxo de trabalho, espera que termine e depois continua com o principal.
+
+## Como configurá-lo
+
+1. **Escolha um fluxo de trabalho** do menu suspenso (as auto-referências estão bloqueadas para evitar loops).
+2. **Atribua entradas**: Se o fluxo de trabalho secundário tiver um disparador de Formulário de entrada, você verá cada campo e poderá conectar variáveis do principal. Os valores atribuídos são os que o secundário recebe.
+3. **Saídas**: Depois que o secundário finaliza, o bloco expõe:
+   - `result` – a resposta final do fluxo de trabalho secundário
+   - `success` – se foi executado sem erros
+   - `error` – mensagem quando a execução falha
+
+## Notas de execução
+
+- Os fluxos de trabalho secundários são executados no mesmo contexto de espaço de trabalho, então as variáveis de ambiente e ferramentas são mantidas.
+- O bloco utiliza o versionamento de implementação: qualquer execução de API, agendamento, webhook, manual ou chat chama a instantânea implementada. Reimplemente o secundário quando o alterar.
+- Se o secundário falhar, o bloco gera um erro a menos que você o gerencie posteriormente.
+
+<Callout>
+  Mantenha os fluxos de trabalho secundários focados. Fluxos pequenos e
+  reutilizáveis facilitam sua combinação sem criar aninhamentos profundos.
+</Callout>

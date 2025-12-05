@@ -1,0 +1,53 @@
+---
+title: Disparador de formulário de entrada
+description: Disparador manual com um esquema de entrada estruturado
+---
+
+<div className="flex justify-center my-6">![Form](/images/form.png)</div>
+
+## Visão Geral
+
+Use um disparador de formulário de entrada quando um fluxo de trabalho deve ser iniciado a partir do editor com campos tipados. O painel de execução mostra exatamente os campos que você define, então o fluxo de trabalho sempre recebe dados limpos.
+
+## O que você define
+
+Adicione campos no construtor de formato de entrada (texto, número, booleano, JSON, etc.). Para cada campo:
+
+- O valor aparece como `<blockName.field>` no fluxo de trabalho.
+- A carga completa é refletida em `<blockName.input>` para maior conveniência.
+
+Se você deixar o formulário vazio, o disparador não tem saídas.
+
+## Execuções manuais
+
+<div className="flex justify-center my-6">
+  <Image
+    src="/static/triggers/input-form-panel-light.png"
+    alt="Painel de execução do formulário de entrada"
+    width={400}
+    height={250}
+    className="rounded-xl border border-border shadow-sm"
+  />
+</div>
+
+Quando você pressiona Executar no editor, o painel mostra o formulário. Os valores enviados alimentam diretamente a saída do disparador, então os blocos posteriores podem referenciá-los sem análise adicional. Os números são convertidos para números, os booleanos são convertidos para verdadeiro/falso, e os campos JSON são analisados antes que o fluxo de trabalho os veja.
+
+## Fluxos de trabalho secundários
+
+<div className="flex justify-center my-6">
+  <Image
+    src="/static/triggers/workflow-input-mapping-light.png"
+    alt="Mapeamento de entrada de fluxo de trabalho"
+    width={400}
+    height={250}
+    className="rounded-xl border border-border shadow-sm"
+  />
+</div>
+
+Os disparadores de formulário de entrada também alimentam o bloco de fluxo de trabalho. Quando você incorpora um fluxo de trabalho secundário, a etapa de mapeamento mostra os campos do formulário secundário para que você possa conectar variáveis do pai. Tudo o que você mapeia se torna o envio do formulário de entrada do fluxo de trabalho secundário.
+
+<Callout>
+  Precisa de um botão de execução rápida sem campos? Use um disparador manual.
+  Escolha o formulário de entrada quando quiser validação e uma estrutura
+  previsível.
+</Callout>

@@ -1,0 +1,248 @@
+---
+title: Paralelo
+---
+
+O bloco Paralelo é um bloco contenedor no Aurora Workflow que permite executar múltiplas instâncias de blocos simultaneamente para um processamento mais rápido do fluxo de trabalho.
+
+<div className="flex justify-center my-6">![API](/images/parallel.png)</div>
+
+O bloco Paralelo suporta dois tipos de execução concorrente:
+
+<Callout type="info">
+  Os blocos Paralelos são nós contenedores que executam seu conteúdo múltiplas
+  vezes simultaneamente, diferentemente dos loops que executam sequencialmente.
+</Callout>
+
+## Visão Geral
+
+O bloco Paralelo permite:
+
+<Steps>
+  <Step>
+    <strong>Distribuir trabalho</strong>: Processar múltiplos elementos
+    concorrentemente
+  </Step>
+  <Step>
+    <strong>Acelerar a execução</strong>: Executar operações independentes
+    simultaneamente
+  </Step>
+  <Step>
+    <strong>Lidar com operações massivas</strong>: Processar grandes conjuntos
+    de dados eficientemente
+  </Step>
+  <Step>
+    <strong>Agregar resultados</strong>: Coletar saídas de todas as execuções
+    paralelas
+  </Step>
+</Steps>
+
+## Opções de configuração
+
+### Tipo de paralelo
+
+Escolha entre dois tipos de execução paralela:
+
+<Tabs items={['Count-based', 'Collection-based']}>
+  <Tab title='Count-based'>
+    **Paralelo baseado em contagem** - Executa um número fixo de instâncias paralelas:
+    
+    <div className="flex justify-center">
+      <Image
+        src="/static/workflow/pt-BR/blocks/parallel-1.png"
+        alt="Execução paralela baseada em contagem"
+        width={500}
+        height={400}
+        className="my-6"
+      />
+    </div>
+    
+    Use quando precisar executar a mesma operação múltiplas vezes concorrentemente.
+
+    ```
+    Example: Run 5 parallel instances
+    - Instance 1 ┐
+    - Instance 2 ├─ All execute simultaneously
+    - Instance 3 │
+    - Instance 4 │
+    - Instance 5 ┘
+    ```
+
+  </Tab>
+  <Tab title='Collection-based'>
+    **Paralelo baseado em coleção** - Distribui uma coleção entre instâncias paralelas:
+    
+    <div className="flex justify-center">
+      <Image
+        src="/static/workflow/pt-BR/blocks/parallel-2.png"
+        alt="Execução paralela baseada em coleção"
+        width={500}
+        height={400}
+        className="my-6"
+      />
+    </div>
+    
+    Cada instância processa um elemento da coleção simultaneamente.
+
+    ```
+    Example: Process ["task1", "task2", "task3"] in parallel
+    - Instance 1: Process "task1" ┐
+    - Instance 2: Process "task2" ├─ All execute simultaneously
+    - Instance 3: Process "task3" ┘
+    ```
+
+  </Tab>
+</Tabs>
+
+## Como usar blocos paralelos
+
+### Criação de um bloco paralelo
+
+1. Arraste um bloco Paralelo da barra de ferramentas para seu canvas
+2. Configure o tipo de paralelo e os parâmetros
+3. Arraste um único bloco dentro do contenedor paralelo
+4. Conecte o bloco conforme necessário
+
+### Acesso aos resultados
+
+Depois que um bloco paralelo é concluído, você pode acessar os resultados agregados:
+
+- **`<parallel.results>`**: Array de resultados de todas as instâncias paralelas
+
+## Exemplos de casos de uso
+
+### Processamento de API em lote
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">
+    Cenário: Processar múltiplas chamadas API simultaneamente
+  </h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>Bloco paralelo com coleção de endpoints API</li>
+    <li>Dentro do paralelo: O bloco API chama cada endpoint</li>
+    <li>Depois do paralelo: Processar todas as respostas juntas</li>
+  </ol>
+</div>
+
+### Processamento de IA com múltiplos modelos
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">
+    Cenário: Obter respostas de múltiplos modelos de IA
+  </h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>
+      Paralelo baseado em coleção sobre uma lista de IDs de modelos (ex.,
+      ["gpt-4o", "claude-3.7-sonnet", "gemini-2.5-pro"])
+    </li>
+    <li>
+      Dentro do paralelo: O modelo do agente é definido para o elemento atual da
+      coleção
+    </li>
+    <li>Depois do paralelo: Comparar e selecionar a melhor resposta</li>
+  </ol>
+</div>
+
+## Características avançadas
+
+### Agregação de resultados
+
+Os resultados de todas as instâncias paralelas são coletados automaticamente:
+
+```javascript
+// In a Function block after the parallel
+const allResults = input.parallel.results;
+// Returns: [result1, result2, result3, ...]
+```
+
+### Isolamento de instâncias
+
+Cada instância paralela executa independentemente:
+
+- Escopos de variáveis separados
+- Sem estado compartilhado entre instâncias
+- Falhas em uma instância não afetam as outras
+
+### Limitações
+
+<Callout type="warning">
+  Os blocos contenedores (Loops e Paralelos) não podem ser aninhados uns dentro
+  de outros. Isso significa: - Você não pode colocar um bloco de Loop dentro de
+  um bloco Paralelo - Você não pode colocar outro bloco Paralelo dentro de um
+  bloco Paralelo - Você não pode colocar nenhum bloco contenedor dentro de outro
+  bloco contenedor
+</Callout>
+
+<Callout type="warning">
+  Os blocos paralelos podem conter apenas um único bloco. Você não pode ter
+  múltiplos blocos conectados entre si dentro de um paralelo - nesse caso,
+  apenas o primeiro bloco seria executado.
+</Callout>
+
+<Callout type="info">
+  Embora a execução paralela seja mais rápida, tenha em mente: - Os limites de
+  taxa das APIs ao fazer solicitações concorrentes - O uso de memória com
+  grandes conjuntos de dados - Máximo de 20 instâncias concorrentes para evitar
+  esgotamento de recursos
+</Callout>
+
+## Paralelo vs Loop
+
+Entendendo quando usar cada um:
+
+| Característica  | Paralelo                                 | Loop                    |
+| --------------- | ---------------------------------------- | ----------------------- |
+| Execução        | Concorrente                              | Sequencial              |
+| Velocidade      | Mais rápido para operações independentes | Mais lento mas ordenado |
+| Ordem           | Sem ordem garantida                      | Mantém a ordem          |
+| Caso de uso     | Operações independentes                  | Operações dependentes   |
+| Uso de recursos | Maior                                    | Menor                   |
+
+## Entradas e Saídas
+
+<Tabs>
+  <Tab title="Configuração">
+    <ul>
+      <li>
+        <strong>Tipo de paralelo</strong>: Escolha entre 'count' ou 'collection'
+      </li>
+      <li>
+        <strong>Count</strong>: Número de instâncias a executar (baseado em
+        contagem)
+      </li>
+      <li>
+        <strong>Collection</strong>: Array ou objeto a distribuir (baseado em
+        coleção)
+      </li>
+    </ul>
+  </Tab>
+  <Tab title="Variáveis">
+    <ul>
+      <li>
+        <strong>parallel.currentItem</strong>: Elemento para esta instância
+      </li>
+      <li>
+        <strong>parallel.index</strong>: Número da instância (base 0)
+      </li>
+      <li>
+        <strong>parallel.items</strong>: Coleção completa (baseado em coleção)
+      </li>
+    </ul>
+  </Tab>
+  <Tab title="Resultados">
+    <ul>
+      <li>
+        <strong>parallel.results</strong>: Array de todos os resultados de
+        instâncias
+      </li>
+      <li>
+        <strong>Acesso</strong>: Disponível em blocos após o paralelo
+      </li>
+    </ul>
+  </Tab>
+</Tabs>
+
+## Melhores práticas
+
+- **Apenas operações independentes**: Certifique-se de que as operações não dependam umas das outras
+- **Tratamento de limites de taxa**: Adicione atrasos ou limitações para fluxos de trabalho com uso intensivo de API
+- **Tratamento de erros**: Cada instância deve lidar com seus próprios erros corretamente

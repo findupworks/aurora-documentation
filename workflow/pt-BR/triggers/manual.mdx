@@ -1,0 +1,41 @@
+---
+title: Disparador manual
+description: Executa um fluxo de trabalho sob demanda sem entradas
+---
+
+<div className="flex justify-center my-6">![Manual](/images/manual.png)</div>
+## Visão Geral
+
+O disparador manual adiciona um simples botão Executar na parte superior do seu fluxo de trabalho. Use-o quando quiser executar o fluxo de trabalho imediatamente sem coletar dados adicionais.
+
+## Como funciona
+
+<div className="flex justify-center my-6">
+  <Image
+    src="/static/triggers/manual-run-light.png"
+    alt="Botão de execução do disparador manual"
+    width={400}
+    height={250}
+    className="rounded-xl border border-border shadow-sm"
+  />
+</div>
+
+- Inicia o fluxo de trabalho utilizando a instantânea de deploy ativa
+- Não envia nenhuma carga útil—os blocos posteriores apenas veem o que já têm configurado
+- Perfeito para verificações rápidas, testes de fumaça ou fluxos que dependem apenas de variáveis internas
+
+## Quando usar
+
+- Inicie um fluxo de trabalho após publicar um novo deploy para confirmar que tudo ainda está funcionando
+- Execute tarefas de manutenção que não requerem entrada externa
+- Ative fluxos de trabalho secundários que apenas leem estado ou variáveis de ambiente
+
+## Comparação com o formulário de entrada
+
+Precisa de valores estruturados ou validação de tipos em tempo de execução? Mude para um disparador de formulário de entrada—o painel de execução coletará esses campos antes que o fluxo de trabalho comece.
+
+<Callout>
+  As execuções do disparador manual não sobrescrevem seu histórico de deploy.
+  Atualize e faça o deploy novamente quando as alterações no canvas precisarem
+  entrar em produção.
+</Callout>

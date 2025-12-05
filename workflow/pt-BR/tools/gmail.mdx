@@ -1,0 +1,144 @@
+---
+title: Gmail
+description: Envia Gmail ou ativa fluxos de trabalho a partir de eventos do Gmail
+---
+
+import { BlockInfoCard } from "/snippets/block-info-card.jsx";
+
+<BlockInfoCard
+  type="gmail"
+  color="#E0E0E0"
+  icon={true}
+  iconSvg={`<svg className="block-icon"
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 48 48'
+      
+      
+      
+    >
+      <path fill='#4caf50' d='M45,16.2l-5,2.75l-5,4.75L35,40h7c1.657,0,3-1.343,3-3V16.2z' />
+      <path fill='#1e88e5' d='M3,16.2l3.614,1.71L13,23.7V40H6c-1.657,0-3-1.343-3-3V16.2z' />
+      <polygon
+        fill='#e53935'
+        points='35,11.2 24,19.45 13,11.2 12,17 13,23.7 24,31.95 35,23.7 36,17'
+      />
+      <path
+        fill='#c62828'
+        d='M3,12.298V16.2l10,7.5V11.2L9.876,8.859C9.132,8.301,8.228,8,7.298,8h0C4.924,8,3,9.924,3,12.298z'
+      />
+      <path
+        fill='#fbc02d'
+        d='M45,12.298V16.2l-10,7.5V11.2l3.124-2.341C38.868,8.301,39.772,8,40.702,8h0 C43.076,8,45,9.924,45,12.298z'
+      />
+    </svg>`}
+/>
+
+{/* MANUAL-CONTENT-START:intro */}
+[Gmail](https://gmail.com) é o popular serviço de email do Google que fornece uma plataforma robusta para enviar, receber e gerenciar comunicações por email. Com mais de 1,8 bilhão de usuários ativos em todo o mundo, o Gmail oferece uma experiência rica em recursos com capacidades poderosas de busca, ferramentas de organização e opções de integração.
+
+Com o Gmail, você pode:
+
+- **Enviar e receber emails**: Comunique-se com contatos através de uma interface limpa e intuitiva
+- **Organizar mensagens**: Use etiquetas, pastas e filtros para manter sua caixa de entrada organizada
+- **Buscar eficientemente**: Encontre mensagens específicas rapidamente com a poderosa tecnologia de busca do Google
+- **Automatizar fluxos de trabalho**: Crie filtros e regras para processar automaticamente emails recebidos
+- **Acessar de qualquer lugar**: Use o Gmail em diferentes dispositivos com conteúdo e configurações sincronizados
+- **Integrar com outros serviços**: Conecte-se com Google Calendar, Drive e outras ferramentas de produtividade
+
+No Sim, a integração do Gmail permite que seus agentes enviem, leiam e busquem emails de forma programática. Isso permite cenários de automação poderosos como enviar notificações, processar mensagens recebidas, extrair informações de emails e gerenciar fluxos de comunicação. Seus agentes podem redigir e enviar emails personalizados, buscar mensagens específicas usando a sintaxe de consulta do Gmail e extrair conteúdo de emails para usar em outras partes do seu fluxo de trabalho. Em breve, os agentes também poderão ouvir novos emails em tempo real, permitindo fluxos de trabalho reativos que podem acionar ações baseadas em mensagens recebidas. Esta integração fecha a lacuna entre seus fluxos de trabalho de IA e as comunicações por email, permitindo interação perfeita com uma das plataformas de comunicação mais usadas do mundo.
+{/* MANUAL-CONTENT-END */}
+
+## Instruções de uso
+
+Integre o Gmail no fluxo de trabalho. Pode enviar, ler e buscar emails. Requer OAuth. Pode ser usado no modo de ativação para iniciar um fluxo de trabalho quando um novo email é recebido.
+
+## Ferramentas
+
+### `gmail_send`
+
+Enviar emails usando Gmail
+
+#### Entrada
+
+| Parâmetro     | Tipo   | Obrigatório | Descrição                                     |
+| ------------- | ------ | ----------- | --------------------------------------------- |
+| `to`          | string | Sim         | Endereço de email do destinatário             |
+| `subject`     | string | Sim         | Assunto do email                              |
+| `body`        | string | Sim         | Conteúdo do corpo do email                    |
+| `cc`          | string | Não         | Destinatários em CC (separados por vírgulas)  |
+| `bcc`         | string | Não         | Destinatários em CCO (separados por vírgulas) |
+| `attachments` | file[] | Não         | Arquivos para anexar ao email                 |
+
+#### Saída
+
+| Parâmetro  | Tipo   | Descrição           |
+| ---------- | ------ | ------------------- |
+| `content`  | string | Mensagem de sucesso |
+| `metadata` | object | Metadados do email  |
+
+### `gmail_draft`
+
+Criar rascunhos de emails usando Gmail
+
+#### Entrada
+
+| Parâmetro     | Tipo   | Obrigatório | Descrição                                     |
+| ------------- | ------ | ----------- | --------------------------------------------- |
+| `to`          | string | Sim         | Endereço de email do destinatário             |
+| `subject`     | string | Sim         | Assunto do email                              |
+| `body`        | string | Sim         | Conteúdo do corpo do email                    |
+| `cc`          | string | Não         | Destinatários em CC (separados por vírgulas)  |
+| `bcc`         | string | Não         | Destinatários em CCO (separados por vírgulas) |
+| `attachments` | file[] | Não         | Arquivos para anexar ao rascunho do email     |
+
+#### Saída
+
+| Parâmetro  | Tipo   | Descrição             |
+| ---------- | ------ | --------------------- |
+| `content`  | string | Mensagem de sucesso   |
+| `metadata` | object | Metadados do rascunho |
+
+### `gmail_read`
+
+Ler emails do Gmail
+
+#### Entrada
+
+| Parâmetro            | Tipo    | Obrigatório | Descrição                                                      |
+| -------------------- | ------- | ----------- | -------------------------------------------------------------- |
+| `messageId`          | string  | Não         | ID da mensagem a ler                                           |
+| `folder`             | string  | Não         | Pasta/etiqueta de onde ler os emails                           |
+| `unreadOnly`         | boolean | Não         | Recuperar apenas mensagens não lidas                           |
+| `maxResults`         | number  | Não         | Número máximo de mensagens a recuperar (padrão: 1, máximo: 10) |
+| `includeAttachments` | boolean | Não         | Baixar e incluir anexos do email                               |
+
+#### Saída
+
+| Parâmetro     | Tipo   | Descrição                  |
+| ------------- | ------ | -------------------------- |
+| `content`     | string | Conteúdo de texto do email |
+| `metadata`    | json   | Metadados do email         |
+| `attachments` | file[] | Anexos do email            |
+
+### `gmail_search`
+
+Buscar emails no Gmail
+
+#### Entrada
+
+| Parâmetro    | Tipo   | Obrigatório | Descrição                              |
+| ------------ | ------ | ----------- | -------------------------------------- |
+| `query`      | string | Sim         | Consulta de busca para emails          |
+| `maxResults` | number | Não         | Número máximo de resultados a retornar |
+
+#### Saída
+
+| Parâmetro  | Tipo   | Descrição                      |
+| ---------- | ------ | ------------------------------ |
+| `content`  | string | Resumo dos resultados da busca |
+| `metadata` | object | Metadados da busca             |
+
+## Notas
+
+- Categoria: `tools`
+- Tipo: `gmail`

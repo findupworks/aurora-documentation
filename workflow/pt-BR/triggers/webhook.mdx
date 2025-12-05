@@ -1,0 +1,128 @@
+---
+title: Webhooks
+---
+
+<div className="flex justify-center my-6">![Webhook](/images/webhook.png)</div>
+Os webhooks permitem que serviços externos ativem a execução de fluxos de trabalho
+a partir de webhooks externos enviando solicitações HTTP para seu fluxo de trabalho.
+O Aurora Workflow suporta duas abordagens para disparadores baseados em webhooks.
+
+## Disparador de webhook genérico
+
+O bloco de webhook genérico cria um endpoint flexível que pode receber qualquer carga útil e ativar seu fluxo de trabalho:
+
+### Como funciona
+
+1. **Adicionar bloco de webhook genérico** - Arraste o bloco de webhook genérico para iniciar seu fluxo de trabalho
+2. **Configurar carga útil** - Configure a estrutura de carga útil esperada (opcional)
+3. **Obter URL do webhook** - Copie o endpoint único gerado automaticamente
+4. **Integração externa** - Configure seu serviço externo para enviar solicitações POST para esta URL
+5. **Execução do fluxo de trabalho** - Cada solicitação à URL do webhook ativa o fluxo de trabalho
+
+### Características
+
+- **Carga útil flexível**: Aceita qualquer estrutura de carga útil JSON
+- **Análise automática**: Os dados do webhook são analisados automaticamente e estão disponíveis para os blocos subsequentes
+- **Autenticação**: Autenticação opcional através de token bearer ou cabeçalho personalizado
+- **Limitação de taxa**: Proteção incorporada contra abusos
+- **Deduplicação**: Evita execuções duplicadas de solicitações repetidas
+
+<Callout type="info">
+  O disparador de webhook genérico é ativado sempre que a URL do webhook recebe
+  uma solicitação, tornando-o perfeito para integrações em tempo real.
+</Callout>
+
+## Modo de disparador para blocos de serviço
+
+Alternativamente, você pode usar blocos de serviço específicos (como Slack, GitHub, etc.) no "modo de disparador" para criar endpoints de webhook mais especializados:
+
+<div className="mx-auto w-full overflow-hidden rounded-lg">
+  <Video src="slack-trigger.mp4" width={700} height={450} />
+</div>
+
+### Configuração do modo de ativação
+
+1. **Adicionar bloco de serviço** - Escolha um bloco de serviço (ex.: Slack, GitHub)
+2. **Habilitar modo de ativação** - Ative "Usar como ativador" nas configurações do bloco
+3. **Configurar serviço** - Configure a autenticação e os filtros de eventos específicos para esse serviço
+4. **Registro do webhook** - O serviço registra automaticamente o webhook na plataforma externa
+5. **Execução baseada em eventos** - O fluxo de trabalho é ativado apenas para eventos específicos desse serviço
+
+### Quando usar cada abordagem
+
+**Use webhook genérico quando:**
+
+- Integrar com aplicações ou serviços personalizados
+- Precisar de máxima flexibilidade na estrutura da carga útil
+- Trabalhar com serviços que não têm blocos dedicados
+- Construir integrações internas
+
+**Use o modo de ativação quando:**
+
+- Trabalhar com serviços compatíveis (Slack, GitHub, etc.)
+- Quiser filtragem de eventos específica do serviço
+- Precisar de registro automático de webhooks
+- Quiser tratamento estruturado de dados para esse serviço
+
+## Serviços compatíveis com o modo de ativação
+
+Os seguintes blocos de serviço suportam o modo de ativação:
+
+- **Slack** - Mensagens, menções, reações
+- **GitHub** - Eventos de push, PR, issues
+- **Telegram** - Mensagens e comandos de bot
+- **Gmail** - Notificações de e-mail
+- **WhatsApp** - Eventos de mensagens
+- **Jira** - Atualizações de issues, comentários
+- **Linear** - Mudanças de status de issues
+- **Notion** - Atualizações de páginas
+
+## Segurança e melhores práticas
+
+### Opções de autenticação
+
+- **Tokens Bearer**: Inclua o cabeçalho `Authorization: Bearer <token>`
+- **Cabeçalhos personalizados**: Defina cabeçalhos de autenticação personalizados
+
+### Tratamento de carga útil
+
+- **Validação**: Valide as cargas úteis recebidas para prevenir dados malformados
+- **Limites de tamanho**: Os webhooks têm limites de tamanho de carga útil por segurança
+- **Tratamento de erros**: Configure respostas de erro para solicitações inválidas
+
+### Testes de webhooks
+
+1. Use ferramentas como Postman ou curl para testar seus endpoints de webhook
+2. Revise os logs de execução do fluxo de trabalho para depuração
+3. Verifique se a estrutura da carga útil corresponde às suas expectativas
+4. Teste cenários de autenticação e erros
+
+<Callout type="warning">
+  Sempre valide e sanitize os dados recebidos do webhook antes de processá-los
+  em seus fluxos de trabalho.
+</Callout>
+
+## Casos de uso comuns
+
+### Notificações em tempo real
+
+- Mensagens do Slack que disparam respostas automatizadas
+- Notificações por e-mail para eventos críticos
+
+### Integração CI/CD
+
+- Pushes do GitHub que disparam fluxos de trabalho de deploy
+- Atualizações do status de build
+- Canais automatizados de testes
+
+### Sincronização de dados
+
+- Mudanças no Linear que atualizam outros sistemas
+- Envios de formulários que disparam ações de acompanhamento
+- Processamento de pedidos de e-commerce
+
+### Atendimento ao cliente
+
+- Fluxos de trabalho de criação de tickets de suporte
+- Processos automatizados de escalonamento
+- Roteamento de comunicação multicanal

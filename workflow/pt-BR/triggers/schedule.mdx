@@ -1,0 +1,80 @@
+---
+title: Agendamento
+---
+
+O bloco de Agendamento ativa automaticamente fluxos de trabalho de forma recorrente em intervalos ou momentos específicos.
+
+<div className="flex justify-center my-6">
+  ![Schedule](/images/schedule.png)
+</div>
+
+## Opções de agendamento
+
+Configure quando seu fluxo de trabalho é executado utilizando as opções suspensas:
+
+<Tabs items={["Intervalos simples", "Expressões cron"]}>
+  <Tab title="Intervalos simples" icon="alarm-clock">
+    <ul>
+      <li>
+        <strong>A cada poucos minutos</strong>: intervalos de 5, 15, 30 minutos
+      </li>
+      <li>
+        <strong>Por hora</strong>: A cada hora ou a cada poucas horas
+      </li>
+      <li>
+        <strong>Diariamente</strong>: Uma ou várias vezes ao dia
+      </li>
+      <li>
+        <strong>Semanalmente</strong>: Dias específicos da semana
+      </li>
+      <li>
+        <strong>Mensalmente</strong>: Dias específicos do mês
+      </li>
+    </ul>
+  </Tab>
+  <Tab title="Expressões cron" icon="calendar">
+    <p>Use expressões cron para agendamento avançado:</p>
+    <div className="text-sm space-y-1">
+      <div>
+        <code>0 9 * * 1-5</code> - Todos os dias úteis às 9h
+      </div>
+      <div>
+        <code>*/15 * * * *</code> - A cada 15 minutos
+      </div>
+      <div>
+        <code>0 0 1 * *</code> - Primeiro dia de cada mês
+      </div>
+    </div>
+  </Tab>
+</Tabs>
+
+## Configuração de agendamentos
+
+<div className="mx-auto w-full overflow-hidden rounded-lg">
+  <Video src="configure-schedule.mp4" width={700} height={450} />
+</div>
+
+Quando um fluxo de trabalho está agendado:
+
+- O agendamento se torna **ativo** e mostra o próximo tempo de execução
+- Clique no botão **"Agendado"** para desativar o agendamento
+- Os agendamentos são desativados automaticamente após **3 falhas consecutivas**
+
+## Agendamentos desativados
+
+<div className="flex justify-center">
+  <Image
+    src="/static/schedule-disabled.png"
+    alt="Agendamento desativado"
+    width={500}
+    height={350}
+    className="my-6"
+  />
+</div>
+
+Os agendamentos desativados mostram quando estiveram ativos pela última vez e podem ser reativados a qualquer momento.
+
+<Callout>
+  Os blocos de agendamento não podem receber conexões de entrada e funcionam
+  exclusivamente como disparadores de fluxos de trabalho.
+</Callout>

@@ -1,0 +1,232 @@
+---
+title: Supabase
+description: Usar o banco de dados Supabase
+---
+
+import { BlockInfoCard } from "/snippets/block-info-card.jsx";
+
+<BlockInfoCard
+  type="supabase"
+  color="#1C1C1C"
+  icon={true}
+  iconSvg={`<svg className="block-icon"    viewBox='0 0 27 27' xmlns='http://www.w3.org/2000/svg'>
+      <path
+        d='M15.4057 26.2606C14.7241 27.1195 13.3394 26.649 13.3242 25.5519L13.083 9.50684H23.8724C25.8262 9.50684 26.9157 11.7636 25.7006 13.2933L15.4057 26.2606Z'
+        fill='url(#paint0_linear)'
+      />
+      <path
+        d='M15.4057 26.2606C14.7241 27.1195 13.3394 26.649 13.3242 25.5519L13.083 9.50684H23.8724C25.8262 9.50684 26.9157 11.7636 25.7006 13.2933L15.4057 26.2606Z'
+        fill='url(#paint1_linear)'
+        fillOpacity='0.2'
+      />
+      <path
+        d='M11.0167 0.443853C11.6983 -0.415083 13.0832 0.0553814 13.0982 1.15237L13.2042 17.1976H2.55005C0.596215 17.1976 -0.493259 14.9408 0.721603 13.4111L11.0167 0.443853Z'
+        fill='#3ECF8E'
+      />
+      <defs>
+        <linearGradient
+          id='paint0_linear'
+          x1='13.084'
+          y1='13.0655'
+          x2='22.6727'
+          y2='17.087'
+          gradientUnits='userSpaceOnUse'
+        >
+          <stop stopColor='#249361' />
+          <stop offset='1' stopColor='#3ECF8E' />
+        </linearGradient>
+        <linearGradient
+          id='paint1_linear'
+          x1='8.83277'
+          y1='7.24485'
+          x2='13.2057'
+          y2='15.477'
+          gradientUnits='userSpaceOnUse'
+        >
+          <stop />
+          <stop offset='1' stopOpacity='0' />
+        </linearGradient>
+      </defs>
+    </svg>`}
+/>
+
+{/* MANUAL-CONTENT-START:intro */}
+[Supabase](https://www.supabase.com/) é uma plataforma backend-as-a-service poderosa e de código aberto que fornece aos desenvolvedores um conjunto de ferramentas para construir, escalar e gerenciar aplicações modernas. O Supabase oferece um banco de dados [PostgreSQL](https://www.postgresql.org/) totalmente gerenciado, autenticação robusta, APIs RESTful e GraphQL instantâneas, assinaturas em tempo real, armazenamento de arquivos e funções edge, tudo acessível através de uma interface unificada e amigável para desenvolvedores. Sua natureza de código aberto e compatibilidade com frameworks populares a tornam uma alternativa convincente ao Firebase, com o benefício adicional da flexibilidade e transparência do SQL.
+
+**Por que Supabase?**
+
+- **APIs instantâneas:** Cada tabela e visualização no seu banco de dados está disponível instantaneamente através de endpoints REST e GraphQL, facilitando a criação de aplicações baseadas em dados sem escrever código backend personalizado.
+- **Dados em tempo real:** O Supabase permite assinaturas em tempo real, permitindo que suas aplicações reajam instantaneamente a mudanças no seu banco de dados.
+- **Autenticação e autorização:** Gerenciamento de usuários incorporado com suporte para email, OAuth, SSO e mais, além de segurança em nível de linha para controle de acesso granular.
+- **Armazenamento:** Faça upload, sirva e gerencie arquivos com segurança com armazenamento integrado que se integra perfeitamente com seu banco de dados.
+- **Funções Edge:** Faça deploy de funções serverless perto dos seus usuários para lógica personalizada de baixa latência.
+
+**Uso do Supabase no Sim**
+
+A integração do Supabase no Aurora Workflow facilita a conexão dos seus fluxos de trabalho baseados em agentes com seus projetos do Supabase. Com apenas alguns campos de configuração — seu ID de projeto, nome da tabela e chave secreta de função de serviço — você pode interagir com segurança com seu banco de dados diretamente dos seus blocos do Aurora Workflow. A integração abstrai a complexidade das chamadas à API, permitindo que você se concentre em construir lógica e automações.
+
+**Benefícios principais de usar Supabase no Sim:**
+
+- **Operações de banco de dados sem código/com pouco código:** Consulte, insira, atualize e exclua linhas nas suas tabelas do Supabase sem escrever SQL ou código backend.
+- **Consultas flexíveis:** Use a [sintaxe de filtro do PostgREST](https://postgrest.org/en/stable/api.html#operators) para realizar consultas avançadas, incluindo filtragem, ordenação e limitação de resultados.
+- **Integração perfeita:** Conecte facilmente o Supabase com outras ferramentas e serviços no seu fluxo de trabalho, habilitando automações poderosas como sincronização de dados, ativação de notificações ou enriquecimento de registros.
+- **Seguro e escalável:** Todas as operações usam sua chave secreta de função de serviço do Supabase, garantindo acesso seguro aos seus dados com a escalabilidade de uma plataforma cloud gerenciada.
+
+Seja você esteja construindo ferramentas internas, automatizando processos de negócios ou impulsionando aplicações de produção, o Supabase no Aurora Workflow fornece uma forma rápida, confiável e amigável para desenvolvedores de gerenciar seus dados e lógica de backend—sem necessidade de gerenciar infraestrutura. Simplesmente configure seu bloco, selecione a operação que você precisa e deixe o Aurora Workflow cuidar do resto.
+{/* MANUAL-CONTENT-END */}
+
+## Instruções de uso
+
+Integre o Supabase no fluxo de trabalho. Pode obter muitas linhas, obter, criar, atualizar, excluir e atualizar/inserir uma linha.
+
+## Ferramentas
+
+### `supabase_query`
+
+Consultar dados de uma tabela do Supabase
+
+#### Entrada
+
+| Parâmetro   | Tipo   | Obrigatório | Descrição                                                  |
+| ----------- | ------ | ----------- | ---------------------------------------------------------- |
+| `projectId` | string | Sim         | Seu ID de projeto do Supabase (ex.: jdrkgepadsdopsntdlom)  |
+| `table`     | string | Sim         | O nome da tabela do Supabase a consultar                   |
+| `filter`    | string | Não         | Filtro PostgREST (ex.: "id=eq.123")                        |
+| `orderBy`   | string | Não         | Coluna para ordenar (adicione DESC para ordem descendente) |
+| `limit`     | number | Não         | Número máximo de linhas a retornar                         |
+| `apiKey`    | string | Sim         | Sua chave secreta de função de serviço do Supabase         |
+
+#### Saída
+
+| Parâmetro | Tipo   | Descrição                                   |
+| --------- | ------ | ------------------------------------------- |
+| `message` | string | Mensagem de status da operação              |
+| `results` | array  | Array de registros retornados pela consulta |
+
+### `supabase_insert`
+
+Inserir dados em uma tabela do Supabase
+
+#### Entrada
+
+| Parâmetro   | Tipo   | Obrigatório | Descrição                                                |
+| ----------- | ------ | ----------- | -------------------------------------------------------- |
+| `projectId` | string | Sim         | ID do seu projeto Supabase (ex.: jdrkgepadsdopsntdlom)   |
+| `table`     | string | Sim         | Nome da tabela Supabase onde inserir dados               |
+| `data`      | array  | Sim         | Os dados a inserir (array de objetos ou um único objeto) |
+| `apiKey`    | string | Sim         | Sua chave secreta de função de serviço do Supabase       |
+
+#### Saída
+
+| Parâmetro | Tipo   | Descrição                      |
+| --------- | ------ | ------------------------------ |
+| `message` | string | Mensagem de status da operação |
+| `results` | array  | Array de registros inseridos   |
+
+### `supabase_get_row`
+
+Obter uma única linha de uma tabela do Supabase baseada em critérios de filtro
+
+#### Entrada
+
+| Parâmetro   | Tipo   | Obrigatório | Descrição                                                             |
+| ----------- | ------ | ----------- | --------------------------------------------------------------------- |
+| `projectId` | string | Sim         | ID do seu projeto Supabase (ex.: jdrkgepadsdopsntdlom)                |
+| `table`     | string | Sim         | Nome da tabela Supabase para consultar                                |
+| `filter`    | string | Sim         | Filtro PostgREST para encontrar a linha específica (ex.: "id=eq.123") |
+| `apiKey`    | string | Sim         | Sua chave secreta de função de serviço do Supabase                    |
+
+#### Saída
+
+| Parâmetro | Tipo   | Descrição                                                                         |
+| --------- | ------ | --------------------------------------------------------------------------------- |
+| `message` | string | Mensagem de status da operação                                                    |
+| `results` | array  | Array que contém os dados da linha se encontrados, array vazio se não encontrados |
+
+### `supabase_update`
+
+Atualizar linhas em uma tabela do Supabase de acordo com critérios de filtro
+
+#### Entrada
+
+| Parâmetro   | Tipo   | Obrigatório | Descrição                                                                  |
+| ----------- | ------ | ----------- | -------------------------------------------------------------------------- |
+| `projectId` | string | Sim         | ID do seu projeto Supabase (ex.: jdrkgepadsdopsntdlom)                     |
+| `table`     | string | Sim         | Nome da tabela Supabase a atualizar                                        |
+| `filter`    | string | Sim         | Filtro PostgREST para identificar as linhas a atualizar (ex.: "id=eq.123") |
+| `data`      | object | Sim         | Dados para atualizar nas linhas correspondentes                            |
+| `apiKey`    | string | Sim         | Sua chave secreta de função de serviço do Supabase                         |
+
+#### Saída
+
+| Parâmetro | Tipo   | Descrição                      |
+| --------- | ------ | ------------------------------ |
+| `message` | string | Mensagem de status da operação |
+| `results` | array  | Array de registros atualizados |
+
+### `supabase_delete`
+
+Excluir linhas de uma tabela do Supabase de acordo com critérios de filtro
+
+#### Entrada
+
+| Parâmetro   | Tipo   | Obrigatório | Descrição                                                                |
+| ----------- | ------ | ----------- | ------------------------------------------------------------------------ |
+| `projectId` | string | Sim         | ID do seu projeto Supabase (ex.: jdrkgepadsdopsntdlom)                   |
+| `table`     | string | Sim         | Nome da tabela Supabase da qual excluir                                  |
+| `filter`    | string | Sim         | Filtro PostgREST para identificar as linhas a excluir (ex.: "id=eq.123") |
+| `apiKey`    | string | Sim         | Sua chave secreta de função de serviço do Supabase                       |
+
+#### Saída
+
+| Parâmetro | Tipo   | Descrição                      |
+| --------- | ------ | ------------------------------ |
+| `message` | string | Mensagem de status da operação |
+| `results` | array  | Array de registros excluídos   |
+
+### `supabase_upsert`
+
+Inserir ou atualizar dados em uma tabela do Supabase (operação upsert)
+
+#### Entrada
+
+| Parâmetro   | Tipo   | Obrigatório | Descrição                                                                         |
+| ----------- | ------ | ----------- | --------------------------------------------------------------------------------- |
+| `projectId` | string | Sim         | ID do seu projeto Supabase (ex.: jdrkgepadsdopsntdlom)                            |
+| `table`     | string | Sim         | Nome da tabela Supabase onde fazer upsert de dados                                |
+| `data`      | array  | Sim         | Os dados para upsert (inserir ou atualizar) - array de objetos ou um único objeto |
+| `apiKey`    | string | Sim         | Sua chave secreta de função de serviço do Supabase                                |
+
+#### Saída
+
+| Parâmetro | Tipo   | Descrição                                   |
+| --------- | ------ | ------------------------------------------- |
+| `message` | string | Mensagem de status da operação              |
+| `results` | array  | Array de registros inseridos ou atualizados |
+
+### `supabase_vector_search`
+
+Realizar busca de similaridade usando pgvector em uma tabela do Supabase
+
+#### Entrada
+
+| Parâmetro        | Tipo   | Obrigatório | Descrição                                                                     |
+| ---------------- | ------ | ----------- | ----------------------------------------------------------------------------- |
+| `projectId`      | string | Sim         | ID do seu projeto Supabase (ex.: jdrkgepadsdopsntdlom)                        |
+| `functionName`   | string | Sim         | Nome da função PostgreSQL que realiza a busca vetorial (ex.: match_documents) |
+| `queryEmbedding` | array  | Sim         | O vetor/embedding de consulta para buscar elementos similares                 |
+| `matchThreshold` | number | Não         | Limiar mínimo de similaridade (0-1), tipicamente 0.7-0.9                      |
+| `matchCount`     | number | Não         | Número máximo de resultados a retornar (padrão: 10)                           |
+| `apiKey`         | string | Sim         | Sua chave secreta de função de serviço do Supabase                            |
+
+#### Saída
+
+| Parâmetro | Tipo   | Descrição                                                                                                                                                                |
+| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `message` | string | Mensagem de status da operação                                                                                                                                           |
+| `results` | array  | Array de registros com pontuações de similaridade da busca vetorial. Cada registro inclui um campo de similaridade (0-1) que indica quão similar é ao vetor de consulta. |
+
+## Notas
+
+- Categoria: `tools`
+- Tipo: `supabase`

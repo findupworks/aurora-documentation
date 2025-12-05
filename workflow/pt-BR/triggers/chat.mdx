@@ -1,0 +1,35 @@
+---
+title: Disparador de Chat
+description: Inicia um fluxo de trabalho a partir de um deploy de chat
+---
+
+<div className="flex justify-center my-6">
+  ![Conversa de deploy de chat](/images/chat.png)
+</div>
+
+## Visão Geral
+
+O disparador de Chat cria uma interface conversacional para seu fluxo de trabalho. Faça o deploy do seu fluxo de trabalho como um chat e os usuários podem interagir com ele através de uma URL compartilhável. Cada mensagem inicia uma nova execução do fluxo de trabalho utilizando seu último deploy.
+
+## Saídas em tempo de execução
+
+O disparador escreve três campos que os blocos posteriores podem referenciar:
+
+| Referência              | Descrição                   |
+| ----------------------- | --------------------------- |
+| `<chat.input>`          | Última mensagem do usuário  |
+| `<chat.conversationId>` | ID da thread de conversação |
+| `<chat.files>`          | Arquivos enviados opcionais |
+
+Os arquivos incluem `name`, `mimeType` e um download assinado `url`.
+
+## Notas de uso
+
+1. Adicione um bloco de Disparador de Chat por fluxo de trabalho.
+2. Faça o deploy do fluxo de trabalho no modo chat.
+3. Compartilhe o link do deploy—cada resposta reutiliza o ID de conversação para que o fluxo de trabalho possa manter o contexto.
+
+<Callout type="info">
+  O construtor bloqueia múltiplos blocos de Disparador de Chat no mesmo fluxo de
+  trabalho.
+</Callout>

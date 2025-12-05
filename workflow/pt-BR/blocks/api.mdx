@@ -1,0 +1,231 @@
+---
+title: API
+---
+
+O bloco API permite conectar seu fluxo de trabalho a serviços externos através de endpoints API utilizando requisições HTTP. Suporta vários métodos como GET, POST, PUT, DELETE e PATCH, permitindo interagir com praticamente qualquer endpoint API.
+
+<div className="flex justify-center my-6">![API](/images/block-api.png)</div>
+
+## Visão geral
+
+O bloco API permite:
+
+<Steps>
+  <Step>
+    <strong>Conectar com serviços externos</strong>: Realizar requisições HTTP a
+    APIs REST e serviços web
+  </Step>
+  <Step>
+    <strong>Enviar e receber dados</strong>: Processar respostas e transformar
+    dados de fontes externas
+  </Step>
+  <Step>
+    <strong>Integrar plataformas de terceiros</strong>: Conectar com serviços
+    como Stripe, Slack ou APIs personalizadas
+  </Step>
+  <Step>
+    <strong>Gerenciar a autenticação</strong>: Suportar vários métodos de
+    autenticação, incluindo tokens Bearer e chaves API
+  </Step>
+</Steps>
+
+## Como funciona
+
+O bloco API processa as requisições HTTP através de uma abordagem estruturada:
+
+1. **Configurar requisição** - Estabelecer URL, método, cabeçalhos e parâmetros do corpo
+2. **Executar requisição** - Enviar requisição HTTP ao endpoint especificado
+3. **Processar resposta** - Gerenciar dados de resposta, códigos de status e cabeçalhos
+4. **Gerenciamento de erros** - Administrar tempos de espera, tentativas e condições de erro
+
+## Opções de configuração
+
+### URL
+
+A URL do endpoint para a requisição API. Pode ser:
+
+- Uma URL estática inserida diretamente no bloco
+- Uma URL dinâmica conectada da saída de outro bloco
+- Uma URL com parâmetros de rota
+
+### Método
+
+Selecione o método HTTP para sua requisição:
+
+- **GET**: Recuperar dados do servidor
+- **POST**: Enviar dados ao servidor para criar um recurso
+- **PUT**: Atualizar um recurso existente no servidor
+- **DELETE**: Excluir um recurso do servidor
+- **PATCH**: Atualizar parcialmente um recurso existente
+
+### Parâmetros de consulta
+
+Defina pares chave-valor que serão adicionados à URL como parâmetros de consulta. Por exemplo:
+
+```
+Key: apiKey
+Value: your_api_key_here
+
+Key: limit
+Value: 10
+```
+
+Estes seriam adicionados à URL como `?apiKey=your_api_key_here&limit=10`.
+
+### Cabeçalhos
+
+Configure os cabeçalhos HTTP para sua solicitação. Os cabeçalhos comuns incluem:
+
+```
+Key: Content-Type
+Value: application/json
+
+Key: Authorization
+Value: Bearer your_token_here
+```
+
+### Corpo da solicitação
+
+Para métodos que suportam um corpo de solicitação (POST, PUT, PATCH), você pode definir os dados a enviar. O corpo pode ser:
+
+- Dados JSON inseridos diretamente no bloco
+- Dados conectados da saída de outro bloco
+- Gerados dinamicamente durante a execução do fluxo de trabalho
+
+### Acesso aos resultados
+
+Depois de completar uma solicitação API, você pode acessar suas saídas:
+
+- **`<api.data>`**: Os dados do corpo de resposta da API
+- **`<api.status>`**: Código de status HTTP (200, 404, 500, etc.)
+- **`<api.headers>`**: Cabeçalhos de resposta do servidor
+- **`<api.error>`**: Detalhes do erro se a solicitação falhou
+
+## Funcionalidades avançadas
+
+### Construção dinâmica de URL
+
+Construa URLs dinamicamente usando variáveis de blocos anteriores:
+
+```javascript
+// In a Function block before the API
+const userId = <start.userId>;
+const apiUrl = `https://api.example.com/users/${userId}/profile`;
+```
+
+### Tentativas de solicitação
+
+O bloco API gerencia automaticamente:
+
+- Tempos de espera de rede com backoff exponencial
+- Respostas de limite de taxa (códigos de status 429)
+- Erros do servidor (códigos de status 5xx) com lógica de tentativa
+- Falhas de conexão com tentativas de reconexão
+
+### Validação de resposta
+
+Valide as respostas da API antes de processá-las:
+
+```javascript
+// In a Function block after the API
+if (<api.status> === 200) {
+  const data = <api.data>;
+  // Process successful response
+} else {
+  // Handle error response
+  console.error(`API Error: ${<api.status>}`);
+}
+```
+
+## Entradas e saídas
+
+<Tabs items={["Configuração", "Variáveis", "Resultados"]}>
+  <Tab>
+    <ul className="list-disc space-y-2 pl-6">
+      <li>
+        <strong>URL</strong>: O endpoint para o qual enviar a solicitação
+      </li>
+      <li>
+        <strong>Method</strong>: Método HTTP (GET, POST, PUT, DELETE, PATCH)
+      </li>
+      <li>
+        <strong>Query Parameters</strong>: Pares chave-valor para parâmetros de
+        URL
+      </li>
+      <li>
+        <strong>Headers</strong>: Cabeçalhos HTTP para autenticação e tipo de
+        conteúdo
+      </li>
+      <li>
+        <strong>Body</strong>: Carga de solicitação para métodos POST/PUT/PATCH
+      </li>
+    </ul>
+  </Tab>
+  <Tab>
+    <ul className="list-disc space-y-2 pl-6">
+      <li>
+        <strong>api.data</strong>: Dados do corpo de resposta da chamada API
+      </li>
+      <li>
+        <strong>api.status</strong>: Código de status HTTP retornado pelo
+        servidor
+      </li>
+      <li>
+        <strong>api.headers</strong>: Cabeçalhos de resposta do servidor
+      </li>
+      <li>
+        <strong>api.error</strong>: Detalhes do erro se a solicitação falhou
+      </li>
+    </ul>
+  </Tab>
+  <Tab>
+    <ul className="list-disc space-y-2 pl-6">
+      <li>
+        <strong>Response Data</strong>: Conteúdo principal de resposta da API
+      </li>
+      <li>
+        <strong>Status Information</strong>: Status HTTP e detalhes de erro
+      </li>
+      <li>
+        <strong>Access</strong>: Disponível em blocos após a chamada API
+      </li>
+    </ul>
+  </Tab>
+</Tabs>
+
+## Exemplos de casos de uso
+
+### Obter dados de perfil de usuário
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">
+    Cenário: Recuperar informações de usuário de um serviço externo
+  </h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>O bloco de função constrói o ID de usuário da entrada</li>
+    <li>O bloco API chama o endpoint GET /users/&#123;id&#125;</li>
+    <li>O bloco de função processa e formata os dados do usuário</li>
+    <li>O bloco de resposta retorna o perfil formatado</li>
+  </ol>
+</div>
+
+### Processamento de pagamentos
+
+<div className="mb-4 rounded-md border p-4">
+  <h4 className="font-medium">
+    Cenário: Processar pagamento através da API do Stripe
+  </h4>
+  <ol className="list-decimal pl-5 text-sm">
+    <li>O bloco de função valida os dados de pagamento</li>
+    <li>O bloco API cria a intenção de pagamento através do Stripe</li>
+    <li>O bloco de condição gerencia o sucesso/falha do pagamento</li>
+    <li>O bloco Supabase atualiza o status do pedido no banco de dados</li>
+  </ol>
+</div>
+
+## Melhores práticas
+
+- **Use variáveis de ambiente para dados sensíveis**: Não codifique diretamente chaves API ou credenciais
+- **Lide com erros elegantemente**: Conecte lógica de tratamento de erros para solicitações falhadas
+- **Valide as respostas**: Verifique os códigos de status e formatos de resposta antes de processar dados
+- **Respeite os limites de taxa**: Considere os limites de taxa da API e implemente a limitação apropriada

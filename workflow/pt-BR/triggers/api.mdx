@@ -1,0 +1,188 @@
+---
+title: Disparador de API
+description: Inicia um fluxo de trabalho a partir de uma solicitação HTTP autenticada
+---
+
+<div className="flex justify-center my-6">
+  ![Formato de entrada do disparador de API](/images/api.png)
+</div>
+
+## Visão Geral
+
+O disparador de API expõe seu fluxo de trabalho como um endpoint HTTP seguro. Envie dados JSON para o endpoint e seu fluxo de trabalho os processa imediatamente. As chamadas à API sempre são executadas contra sua última implementação.
+
+## Configurar formato de entrada
+
+Adicione um campo de **Formato de entrada** para cada parâmetro. As chaves de saída em tempo de execução refletem o esquema e também estão disponíveis sob `<api.input>`.
+
+As execuções manuais no editor utilizam a coluna `value` para que você possa realizar testes sem enviar uma solicitação. Durante a execução, o resolvedor completa tanto `<api.userId>` quanto `<api.input.userId>`.
+
+## Exemplo de solicitação
+
+```bash
+curl -X POST \
+  https://workflow.aurora-ai.co/api/workflows/WORKFLOW_ID/execute \
+  -H 'Content-Type: application/json' \
+  -H 'X-API-Key: YOUR_KEY' \
+  -d '{"userId":"demo-user","maxTokens":1024}'
+```
+
+As respostas bem-sucedidas retornam o resultado de execução serializado do Executor. Os erros mostram falhas de validação, autenticação ou fluxo de trabalho.
+
+## Respostas em streaming
+
+Habilite o streaming em tempo real para receber a saída do fluxo de trabalho conforme ela é gerada, caractere por caractere. Isso é útil para mostrar as respostas de IA progressivamente aos usuários.
+
+### Parâmetros de solicitação
+
+Adicione estes parâmetros para habilitar o streaming:
+
+- `stream` - Defina como `true` para habilitar o streaming de eventos enviados pelo servidor (SSE)
+- `selectedOutputs` - Array de saídas de blocos para transmitir (ex.: `["agent1.content"]`)
+
+### Formato de saída de bloco
+
+Use o formato `blockName.attribute` para especificar quais saídas de blocos transmitir:
+
+- Formato: `"blockName.attribute"` (ex.: se você quiser transmitir o conteúdo do bloco Agente 1, você usaria `"agent1.content"`)
+- Os nomes dos blocos não diferenciam maiúsculas e minúsculas e os espaços são ignorados
+
+### Exemplo de solicitação
+
+```bash
+curl -X POST \
+  https://workflow.aurora-ai.co/api/workflows/WORKFLOW_ID/execute \
+  -H 'Content-Type: application/json' \
+  -H 'X-API-Key: YOUR_KEY' \
+  -d '{
+    "message": "Count to five",
+    "stream": true,
+    "selectedOutputs": ["agent1.content"]
+  }'
+```
+
+### Formato de resposta
+
+As respostas em streaming utilizam o formato de eventos enviados pelo servidor (SSE):
+
+```
+data: {"blockId":"7b7735b9-19e5-4bd6-818b-46aae2596e9f","chunk":"One"}
+
+data: {"blockId":"7b7735b9-19e5-4bd6-818b-46aae2596e9f","chunk":", two"}
+
+data: {"blockId":"7b7735b9-19e5-4bd6-818b-46aae2596e9f","chunk":", three"}
+
+data: {"event":"done","success":true,"output":{},"metadata":{"duration":610}}
+
+data: [DONE]
+```
+
+Cada evento inclui:
+
+- **Fragmentos de streaming**: `{"blockId": "...", "chunk": "text"}` - Texto em tempo real conforme é gerado
+- **Evento final**: `{"event": "done", ...}` - Metadados de execução e resultados completos
+- **Terminador**: `[DONE]` - Sinaliza o fim do stream
+
+### Streaming de múltiplos blocos
+
+Quando `selectedOutputs` inclui múltiplos blocos, cada fragmento indica qual bloco o produziu:
+
+```bash
+curl -X POST \
+  https://workflow.aurora-ai.co/api/workflows/WORKFLOW_ID/execute \
+  -H 'Content-Type: application/json' \
+  -H 'X-API-Key: YOUR_KEY' \
+  -d '{
+    "message": "Process this request",
+    "stream": true,
+    "selectedOutputs": ["agent1.content", "agent2.content"]
+  }'
+```
+
+O campo `blockId` em cada fragmento permite direcionar a saída para o elemento de UI correto:
+
+```
+data: {"blockId":"agent1-uuid","chunk":"Processing..."}
+
+data: {"blockId":"agent2-uuid","chunk":"Analyzing..."}
+
+data: {"blockId":"agent1-uuid","chunk":" complete"}
+```
+
+## Referência de saída
+
+| Referência    | Descrição                                 |
+| ------------- | ----------------------------------------- |
+| `<api.field>` | Campo definido no formato de entrada      |
+| `<api.input>` | Corpo de solicitação estruturado completo |
+
+Se nenhum formato de entrada for definido, o executor expõe o JSON bruto apenas em `<api.input>`.
+
+<Callout type="warning">
+  Um fluxo de trabalho pode conter apenas um disparador de API. Publique uma
+  nova implementação após as alterações para que o endpoint se mantenha
+  atualizado.
+</Callout>
+
+### Formato de carga de arquivos
+
+A API aceita arquivos em dois formatos:
+
+**1. Arquivos codificados em Base64** (recomendado para SDKs):
+
+```json
+{
+  "documents": [
+    {
+      "type": "file",
+      "data": "data:application/pdf;base64,JVBERi0xLjQK...",
+      "name": "document.pdf",
+      "mime": "application/pdf"
+    }
+  ]
+}
+```
+
+- Tamanho máximo de arquivo: 20MB por arquivo
+- Os arquivos são enviados para o armazenamento em nuvem e convertidos em objetos UserFile com todas as propriedades
+
+**2. Referências diretas de URL**:
+
+```json
+{
+  "documents": [
+    {
+      "type": "url",
+      "data": "https://example.com/document.pdf",
+      "name": "document.pdf",
+      "mime": "application/pdf"
+    }
+  ]
+}
+```
+
+- O arquivo não é enviado, a URL é passada diretamente
+- Útil para referenciar arquivos existentes
+
+### Propriedades de arquivos
+
+Para arquivos, acesse todas as propriedades:
+
+| Propriedade                     | Descrição                                     | Tipo   |
+| ------------------------------- | --------------------------------------------- | ------ |
+| `<api.fieldName[0].url>`        | URL de download assinada                      | string |
+| `<api.fieldName[0].name>`       | Nome original do arquivo                      | string |
+| `<api.fieldName[0].size>`       | Tamanho do arquivo em bytes                   | number |
+| `<api.fieldName[0].type>`       | Tipo MIME                                     | string |
+| `<api.fieldName[0].uploadedAt>` | Marca de tempo de upload (ISO 8601)           | string |
+| `<api.fieldName[0].expiresAt>`  | Marca de tempo de expiração da URL (ISO 8601) | string |
+
+Para arquivos referenciados por URL, as mesmas propriedades estão disponíveis, exceto `uploadedAt` e `expiresAt`, já que o arquivo não é enviado para nosso armazenamento.
+
+Se nenhum formato de entrada for definido, o executor expõe apenas o JSON bruto em `<api.input>`.
+
+<Callout type="warning">
+  Um fluxo de trabalho pode conter apenas um disparador de API. Publique uma
+  nova implementação após as alterações para que o endpoint se mantenha
+  atualizado.
+</Callout>

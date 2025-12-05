@@ -1,0 +1,228 @@
+---
+title: "Introdução"
+---
+
+# Gerenciando Documentos
+
+Os **Documentos** são a base do conhecimento dos seus agentes. Através do sistema RAG (Retrieval Augmented Generation), seus agentes podem acessar informações específicas dos documentos para fornecer respostas mais precisas e contextualizadas.
+
+## O que são Documentos?
+
+Documentos são arquivos de texto que contêm informações que seus agentes podem usar:
+
+- 📄 **PDFs**: Documentos técnicos, manuais, relatórios
+- 📝 **Textos**: Artigos, notas, documentação
+- 📊 **Dados estruturados**: Tabelas, listas, FAQs
+- 🔗 **URLs**: Conteúdo de páginas web
+
+## Por que Usar Documentos?
+
+- ✅ **Precisão**: Agentes têm acesso a informações específicas e atualizadas
+- ✅ **Contexto**: Respostas baseadas no conhecimento da sua organização
+- ✅ **Atualização**: Mantenha informações atualizadas sem retreinar modelos
+- ✅ **Controle**: Você controla exatamente o que o agente sabe
+
+## Criando uma Coleção
+
+Siga estes passos para criar sua primeira coleção de documentos:
+
+<Steps>
+  <Step title="Acessar Documentos">
+    1. No menu lateral esquerdo, localize e clique em **Documents** ou **Collections**
+    2. Na página de coleções, clique no botão **Criar Nova Coleção** ou **+ Nova Coleção**
+    3. Uma janela ou formulário será aberto para configuração
+  </Step>
+
+  <Step title="Configurar a Coleção">
+    Preencha as informações básicas da coleção:
+
+    1. **Nome da Coleção**:
+       - Digite um nome descritivo e claro
+       - Exemplo: "Manual do Produto", "Base de Conhecimento de Suporte"
+       - Use nomes que facilitem a identificação posterior
+
+    2. **Descrição**:
+       - Explique o propósito e conteúdo da coleção
+       - Descreva que tipo de informações ela contém
+       - Isso ajuda na organização e busca futura
+
+    3. **Tipo de Processamento**:
+       - Selecione o tipo adequado ao seu conteúdo
+       - Opções podem incluir: texto, PDF, web scraping, etc.
+       - Escolha baseado no formato dos documentos que você vai adicionar
+
+    4. Clique em **Criar** ou **Salvar** para finalizar a criação
+
+  </Step>
+
+  <Step title="Adicionar Documentos">
+    Agora você pode adicionar documentos à coleção criada. Existem várias formas:
+
+    **Opção A: Upload Direto**
+    1. Na página da coleção, clique em **Adicionar Documento** ou **Upload**
+    2. Selecione os arquivos do seu computador
+    3. Formatos suportados: PDF, TXT, DOCX, MD, etc.
+    4. Aguarde o upload ser concluído
+
+    **Opção B: Importar por URL**
+    1. Clique em **Adicionar URL** ou **Importar da Web**
+    2. Cole o link da página que deseja importar
+    3. O sistema irá extrair o conteúdo automaticamente
+    4. Verifique se o conteúdo foi importado corretamente
+
+    **Opção C: Adicionar Texto Manualmente**
+    1. Clique em **Adicionar Texto** ou **Colar Texto**
+    2. Cole o conteúdo diretamente no campo de texto
+    3. Adicione um título para identificar o documento
+    4. Salve o documento
+
+    **Opção D: Usar API**
+    1. Consulte a documentação da API
+    2. Use o endpoint de criação de documentos
+    3. Envie os documentos programaticamente
+    4. Verifique na interface se foram adicionados corretamente
+
+  </Step>
+
+  <Step title="Processar Documentos">
+    Após adicionar os documentos:
+
+    1. **Processamento Automático**:
+       - O sistema iniciará o processamento automaticamente
+       - Você verá um indicador de progresso para cada documento
+       - Aguarde até que todos sejam processados
+
+    2. **Extração e Indexação**:
+       - O sistema extrairá o texto e conteúdo dos documentos
+       - Criará índices para busca rápida
+       - Processará metadados e estrutura do conteúdo
+
+    3. **Verificar Status**:
+       - Verifique o status de cada documento na lista
+       - Documentos processados mostrarão status "Pronto" ou "Processado"
+       - Se houver erros, você verá notificações
+
+    4. **Métricas de Processamento**:
+       - Visualize quantos documentos foram processados
+       - Veja o tamanho total da coleção
+       - Confira estatísticas de conteúdo indexado
+
+  </Step>
+
+  <Step title="Conectar ao Agente">
+    Para que seus agentes usem a coleção:
+
+    1. **Acessar o Agente**:
+       - Navegue até a seção **Agents** no menu lateral
+       - Abra o agente que deseja conectar à coleção
+       - Ou crie um novo agente se necessário
+
+    2. **Configurar Knowledge Base**:
+       - Dentro das configurações do agente, localize a seção **Knowledge**, **Documents** ou **Knowledge Base**
+       - Clique para editar ou configurar
+
+    3. **Selecionar a Coleção**:
+       - Na lista de coleções disponíveis, selecione a coleção que você criou
+       - Você pode selecionar múltiplas coleções se necessário
+       - Verifique se a coleção aparece como disponível
+
+    4. **Salvar Configurações**:
+       - Clique em **Salvar** ou **Aplicar** para confirmar
+       - O agente agora terá acesso aos documentos da coleção
+       - Teste fazendo uma pergunta ao agente relacionada ao conteúdo dos documentos
+
+  </Step>
+</Steps>
+
+## Tipos de Documentos Suportados
+
+### PDFs
+
+- Documentos técnicos
+- Manuais e guias
+- Relatórios e análises
+- Formulários e contratos
+
+### Texto
+
+- Artigos e blog posts
+- Documentação técnica
+- FAQs e bases de conhecimento
+- Notas e memos
+
+### URLs
+
+- Páginas web
+- Documentação online
+- Artigos e posts
+- Wikis e fóruns
+
+## Organizando em Coleções
+
+### Estratégias de Organização
+
+**Por Tema**:
+
+- Coleção de Suporte Técnico
+- Coleção de Vendas
+- Coleção de Produto
+
+**Por Tipo**:
+
+- Coleção de Manuais
+- Coleção de FAQs
+- Coleção de Políticas
+
+**Por Departamento**:
+
+- Coleção de RH
+- Coleção de Financeiro
+- Coleção de Operações
+
+## Boas Práticas
+
+- ✅ **Seja específico**: Documentos específicos geram respostas melhores
+- ✅ **Mantenha atualizado**: Atualize documentos regularmente
+- ✅ **Organize bem**: Use coleções para organizar por tema ou propósito
+- ✅ **Revise qualidade**: Certifique-se de que o conteúdo está correto e completo
+- ✅ **Teste regularmente**: Verifique se os agentes estão usando os documentos corretamente
+
+## Próximos Passos
+
+<Columns cols={2}>
+
+<Card
+  title="Upload e Processamento de Documentos"
+  icon="upload"
+  href="/geral/pt-BR/documents/upload"
+>
+  Aprenda como fazer upload de documentos, formatos suportados e como o
+  processamento funciona no sistema.
+</Card>
+
+<Card
+  title="Criando e Gerenciando Coleções"
+  icon="folder"
+  href="/geral/pt-BR/documents/collections"
+>
+  Saiba como organizar seus documentos em coleções e gerenciá-las de forma
+  eficiente.
+</Card>
+
+<Card
+  title="Otimizando para RAG"
+  icon="sparkles"
+  href="/geral/pt-BR/documents/optimization"
+>
+  Descubra técnicas e melhores práticas para otimizar seus documentos e melhorar
+  a qualidade das respostas RAG.
+</Card>
+
+</Columns>
+
+## Dicas
+
+- 💡 Comece com documentos essenciais
+- 📚 Adicione documentos gradualmente
+- 🔍 Revise métricas para identificar documentos mais úteis
+- 🔄 Atualize documentos quando informações mudarem

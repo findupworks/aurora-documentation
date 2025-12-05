@@ -1,0 +1,94 @@
+---
+title: Confluence
+description: Interaja com o Confluence
+---
+
+import { BlockInfoCard } from "/snippets/block-info-card.jsx";
+
+<BlockInfoCard
+  type="confluence"
+  color="#E0E0E0"
+  icon={true}
+  iconSvg={`<svg className="block-icon"
+      viewBox='0 3 21 24'
+      focusable='false'
+      fill='none'
+      aria-hidden='true'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <path
+        fill='#1868DB'
+        d='M20.602 20.234c-6.584-3.183-8.507-3.66-11.281-3.66-3.255 0-6.03 1.355-8.507 5.16l-.407.622c-.333.513-.407.696-.407.915s.111.403.518.659l4.18 2.598c.221.146.406.22.591.22.222 0 .37-.11.592-.44l.666-1.024c1.035-1.574 1.96-2.086 3.144-2.086 1.035 0 2.256.293 3.772 1.025l4.365 2.049c.444.22.925.11 1.146-.403l2.072-4.537c.222-.512.074-.842-.444-1.098M1.406 12.22c6.583 3.184 8.507 3.66 11.28 3.66 3.256 0 6.03-1.354 8.508-5.16l.407-.622c.332-.512.406-.695.406-.915s-.11-.402-.518-.658L17.31 5.927c-.222-.147-.407-.22-.592-.22-.222 0-.37.11-.592.44l-.665 1.024c-1.036 1.573-1.96 2.086-3.144 2.086-1.036 0-2.257-.293-3.773-1.025L4.18 6.183c-.444-.22-.925-.11-1.147.402L.962 11.123c-.222.512-.074.841.444 1.098'
+      />
+    </svg>`}
+/>
+
+{/* MANUAL-CONTENT-START:intro */}
+[Confluence](https://www.atlassian.com/software/confluence) é a poderosa plataforma de colaboração em equipe e gestão de conhecimento da Atlassian. Serve como um espaço de trabalho centralizado onde as equipes podem criar, organizar e compartilhar informações entre departamentos e organizações.
+
+Com o Confluence, você pode:
+
+- **Criar documentação estruturada**: Construir wikis completos, planos de projetos e bases de conhecimento com formatação rica
+- **Colaborar em tempo real**: Trabalhar em conjunto em documentos com colegas de equipe, com comentários, menções e capacidades de edição
+- **Organizar informações hierarquicamente**: Estruturar o conteúdo com espaços, páginas e hierarquias aninhadas para navegação intuitiva
+- **Integrar com outras ferramentas**: Conectar com Jira, Trello e outros produtos da Atlassian para integração perfeita do fluxo de trabalho
+- **Controlar permissões de acesso**: Gerenciar quem pode visualizar, editar ou comentar em conteúdos específicos
+
+No Sim, a integração com o Confluence permite que seus agentes acessem e aproveitem a base de conhecimento da sua organização. Os agentes podem recuperar informações das páginas do Confluence, buscar conteúdo específico e até mesmo atualizar a documentação quando necessário. Isso permite que seus fluxos de trabalho incorporem o conhecimento coletivo armazenado na sua instância do Confluence, tornando possível criar agentes que possam consultar documentação interna, seguir procedimentos estabelecidos e manter recursos de informação atualizados como parte de suas operações.
+{/* MANUAL-CONTENT-END */}
+
+## Instruções de uso
+
+Integre o Confluence no fluxo de trabalho. Pode ler e atualizar uma página. Requer OAuth.
+
+## Ferramentas
+
+### `confluence_retrieve`
+
+Recupera conteúdo das páginas do Confluence utilizando a API do Confluence.
+
+#### Entrada
+
+| Parâmetro | Tipo   | Obrigatório | Descrição                                                                                             |
+| --------- | ------ | ----------- | ----------------------------------------------------------------------------------------------------- |
+| `domain`  | string | Sim         | Seu domínio do Confluence \(ex.: suaempresa.atlassian.net\)                                          |
+| `pageId`  | string | Sim         | ID da página do Confluence a recuperar                                                                |
+| `cloudId` | string | Não         | ID do Confluence Cloud para a instância. Se não fornecido, será obtido utilizando o domínio.         |
+
+#### Saída
+
+| Parâmetro | Tipo   | Descrição                                       |
+| --------- | ------ | ----------------------------------------------- |
+| `ts`      | string | Marca de tempo da recuperação                   |
+| `pageId`  | string | ID da página do Confluence                      |
+| `content` | string | Conteúdo da página com tags HTML removidas      |
+| `title`   | string | Título da página                                |
+
+### `confluence_update`
+
+Atualiza uma página do Confluence utilizando a API do Confluence.
+
+#### Entrada
+
+| Parâmetro | Tipo   | Obrigatório | Descrição                                                                                             |
+| --------- | ------ | ----------- | ----------------------------------------------------------------------------------------------------- |
+| `domain`  | string | Sim         | Seu domínio do Confluence \(ex.: suaempresa.atlassian.net\)                                          |
+| `pageId`  | string | Sim         | ID da página do Confluence a atualizar                                                                |
+| `title`   | string | Não         | Novo título para a página                                                                             |
+| `content` | string | Não         | Novo conteúdo para a página em formato de armazenamento do Confluence                                 |
+| `version` | number | Não         | Número de versão da página \(necessário para prevenir conflitos\)                                     |
+| `cloudId` | string | Não         | ID do Confluence Cloud para a instância. Se não fornecido, será obtido utilizando o domínio.         |
+
+#### Saída
+
+| Parâmetro | Tipo    | Descrição                                         |
+| --------- | ------- | ------------------------------------------------- |
+| `ts`      | string  | Marca de tempo da atualização                     |
+| `pageId`  | string  | ID da página do Confluence                        |
+| `title`   | string  | Título da página atualizado                       |
+| `success` | boolean | Status de sucesso da operação de atualização      |
+
+## Notas
+
+- Categoria: `tools`
+- Tipo: `confluence`

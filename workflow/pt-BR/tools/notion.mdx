@@ -1,0 +1,182 @@
+---
+title: Notion
+description: Gerenciar páginas do Notion
+---
+
+import { BlockInfoCard } from "/snippets/block-info-card.jsx";
+
+<BlockInfoCard
+  type="notion"
+  color="#181C1E"
+  icon={true}
+  iconSvg={`<svg className="block-icon" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'   >
+      <path
+        d='M31.494141 5.1503906L5.9277344 7.0019531A1.0001 1.0001 0 005.9042969 7.0039062A1.0001 1.0001 0 005.8652344 7.0097656A1.0001 1.0001 0 005.7929688 7.0214844A1.0001 1.0001 0 005.7636719 7.0292969A1.0001 1.0001 0 005.7304688 7.0371094A1.0001 1.0001 0 005.6582031 7.0605469A1.0001 1.0001 0 005.6113281 7.0800781A1.0001 1.0001 0 005.5839844 7.0917969A1.0001 1.0001 0 005.4335938 7.1777344A1.0001 1.0001 0 005.4082031 7.1933594A1.0001 1.0001 0 005.3476562 7.2421875A1.0001 1.0001 0 005.3359375 7.2539062A1.0001 1.0001 0 005.2871094 7.2988281A1.0001 1.0001 0 005.2578125 7.3320312A1.0001 1.0001 0 005.2148438 7.3828125A1.0001 1.0001 0 005.1992188 7.4023438A1.0001 1.0001 0 005.15625 7.4648438A1.0001 1.0001 0 005.1445312 7.484375A1.0001 1.0001 0 005.1074219 7.5488281A1.0001 1.0001 0 005.09375 7.5761719A1.0001 1.0001 0 005.0644531 7.6484375A1.0001 1.0001 0 005.0605469 7.65625A1.0001 1.0001 0 005.015625 7.8300781A1.0001 1.0001 0 005.0097656 7.8613281A1.0001 1.0001 0 005.0019531 7.9414062A1.0001 1.0001 0 005.0019531 7.9453125A1.0001 1.0001 0 005 8L5 33.738281C5 34.76391 5.3151542 35.766862 5.9042969 36.607422A1.0001 1.0001 0 005.953125 36.671875L12.126953 44.101562A1.0001 1.0001 0 0012.359375 44.382812L12.75 44.851562A1.0006635 1.0006635 0 0012.917969 45.011719C13.50508 45.581386 14.317167 45.917563 15.193359 45.861328L42.193359 44.119141C43.762433 44.017718 45 42.697027 45 41.125L45 15.132812C45 14.209354 44.565523 13.390672 43.904297 12.839844A1.0008168 1.0008168 0 0043.748047 12.695312L43.263672 12.337891A1.0001 1.0001 0 0043.0625 12.189453L34.824219 6.1132812C33.865071 5.4054876 32.682705 5.0641541 31.494141 5.1503906zM31.638672 7.1445312C32.352108 7.0927682 33.061867 7.29845 33.636719 7.7226562L39.767578 12.246094L14.742188 13.884766C13.880567 13.941006 13.037689 13.622196 12.425781 13.011719L12.423828 13.011719L8.2539062 8.8398438L31.638672 7.1445312zM7 10.414062L11.011719 14.425781L12 15.414062L12 40.818359L7.5390625 35.449219C7.1899317 34.947488 7 34.351269 7 33.738281L7 10.414062zM41.935547 14.134766C42.526748 14.096822 43 14.54116 43 15.132812L43 41.125C43 41.660973 42.59938 42.08847 42.064453 42.123047L15.064453 43.865234C14.770856 43.884078 14.506356 43.783483 14.314453 43.605469A1.0006635 1.0006635 0 0014.3125 43.603516C14.3125 43.603516 14.310547 43.601562 14.310547 43.601562C14.306465 43.597733 14.304796 43.59179 14.300781 43.587891A1.0006635 1.0006635 0 0014.289062 43.572266C14.112238 43.393435 14 43.149431 14 42.867188L14 16.875C14 16.337536 14.39999 15.911571 14.935547 15.876953L41.935547 14.134766zM38.496094 19L33.421875 19.28125C32.647875 19.36125 31.746094 19.938 31.746094 20.875L33.996094 21.0625L33.996094 31.753906L26.214844 19.751953L20.382812 20.080078C19.291812 20.160078 18.994141 20.970953 18.994141 22.001953L21.244141 22.001953L21.244141 37.566406C21.244141 37.566406 20.191844 37.850406 19.839844 37.941406C19.091844 38.134406 18.994141 38.784906 18.994141 39.253906C18.994141 39.253906 22.746656 39.065547 24.472656 38.935547C26.431656 38.785547 26.496094 37.472656 26.496094 37.472656L24.246094 37.003906L24.246094 25.470703C24.246094 25.470703 29.965844 34.660328 31.714844 37.361328C32.537844 38.630328 33.152375 38.878906 34.234375 38.878906C35.122375 38.878906 35.962141 38.616594 36.994141 38.058594L36.994141 20.697266C36.994141 20.697266 37.184203 20.687141 37.783203 20.494141C38.466203 20.273141 38.496094 19.656 38.496094 19z'
+        fill='currentColor'
+      />
+    </svg>`}
+/>
+
+{/* MANUAL-CONTENT-START:intro */}
+[Notion](https://www.notion.so) é um espaço de trabalho tudo-em-um que combina notas, documentos, wikis e ferramentas de gerenciamento de projetos em uma única plataforma. Oferece um ambiente flexível e personalizável onde os usuários podem criar, organizar e colaborar em conteúdo em vários formatos.
+
+Com o Notion, você pode:
+
+- **Criar conteúdo versátil**: Construir documentos, wikis, bancos de dados, quadros kanban, calendários e mais
+- **Organizar informações**: Estruturar conteúdo hierarquicamente com páginas aninhadas e bancos de dados poderosos
+- **Colaborar sem problemas**: Compartilhar espaços de trabalho e páginas com membros da equipe para colaboração em tempo real
+- **Personalizar seu espaço de trabalho**: Projetar seu fluxo de trabalho ideal com modelos flexíveis e blocos de construção
+- **Conectar informações**: Vincular entre páginas e bancos de dados para criar uma rede de conhecimento
+- **Acessar de qualquer lugar**: Usar o Notion em plataformas web, desktop e móveis com sincronização automática
+
+No Sim, a integração com o Notion permite que seus agentes interajam diretamente com seu espaço de trabalho do Notion de forma programática. Isso permite cenários de automação poderosos como gerenciamento de conhecimento, criação de conteúdo e recuperação de informações. Seus agentes podem:
+
+- **Ler páginas do Notion**: Extrair conteúdo e metadados de qualquer página do Notion.
+- **Ler bancos de dados do Notion**: Recuperar a estrutura e informações de bancos de dados.
+- **Escrever em páginas**: Adicionar novo conteúdo a páginas existentes do Notion.
+- **Criar novas páginas**: Gerar novas páginas do Notion sob uma página principal, com títulos e conteúdo personalizados.
+- **Consultar bancos de dados**: Buscar e filtrar entradas de bancos de dados usando critérios avançados de filtragem e ordenação.
+- **Buscar no espaço de trabalho**: Buscar em todo seu espaço de trabalho do Notion páginas ou bancos de dados que correspondam a consultas específicas.
+- **Criar novos bancos de dados**: Criar programaticamente novos bancos de dados com propriedades e estrutura personalizadas.
+
+Esta integração fecha a lacuna entre seus fluxos de trabalho de IA e sua base de conhecimento, permitindo gerenciamento de documentação e informações sem problemas. Ao conectar o Aurora Workflow com o Notion, você pode automatizar processos de documentação, manter repositórios de informações atualizados, gerar relatórios e organizar informações de forma inteligente, tudo através de seus agentes inteligentes.
+{/* MANUAL-CONTENT-END */}
+
+## Instruções de uso
+
+Integre o Notion no fluxo de trabalho. Pode ler páginas, ler bancos de dados, criar páginas, criar bancos de dados, adicionar conteúdo, consultar bancos de dados e buscar no espaço de trabalho. Requer OAuth.
+
+## Ferramentas
+
+### `notion_read`
+
+Ler conteúdo de uma página do Notion
+
+#### Entrada
+
+| Parâmetro | Tipo   | Obrigatório | Descrição                         |
+| --------- | ------ | ----------- | --------------------------------- |
+| `pageId`  | string | Sim         | O ID da página do Notion para ler |
+
+#### Saída
+
+| Parâmetro  | Tipo   | Descrição                                                                                     |
+| ---------- | ------ | --------------------------------------------------------------------------------------------- |
+| `content`  | string | Conteúdo da página em formato markdown com cabeçalhos, parágrafos, listas e tarefas pendentes |
+| `metadata` | object | Metadados da página incluindo título, URL e marcas de tempo                                   |
+
+### `notion_read_database`
+
+Ler informações e estrutura de banco de dados do Notion
+
+#### Entrada
+
+| Parâmetro    | Tipo   | Obrigatório | Descrição                                 |
+| ------------ | ------ | ----------- | ----------------------------------------- |
+| `databaseId` | string | Sim         | O ID do banco de dados do Notion para ler |
+
+#### Saída
+
+| Parâmetro  | Tipo   | Descrição                                                                                        |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------ |
+| `content`  | string | Informações do banco de dados incluindo título, esquema de propriedades e metadados              |
+| `metadata` | object | Metadados do banco de dados incluindo título, ID, URL, marcas de tempo e esquema de propriedades |
+
+### `notion_write`
+
+Adicionar conteúdo a uma página do Notion
+
+#### Entrada
+
+| Parâmetro | Tipo   | Obrigatório | Descrição                                          |
+| --------- | ------ | ----------- | -------------------------------------------------- |
+| `pageId`  | string | Sim         | O ID da página do Notion à qual adicionar conteúdo |
+| `content` | string | Sim         | O conteúdo para adicionar à página                 |
+
+#### Saída
+
+| Parâmetro | Tipo   | Descrição                                                               |
+| --------- | ------ | ----------------------------------------------------------------------- |
+| `content` | string | Mensagem de sucesso que confirma que o conteúdo foi adicionado à página |
+
+### `notion_create_page`
+
+Criar uma nova página no Notion
+
+#### Entrada
+
+| Parâmetro  | Tipo   | Obrigatório | Descrição                                            |
+| ---------- | ------ | ----------- | ---------------------------------------------------- |
+| `parentId` | string | Sim         | ID da página pai                                     |
+| `title`    | string | Não         | Título da nova página                                |
+| `content`  | string | Não         | Conteúdo opcional para adicionar à página ao criá-la |
+
+#### Saída
+
+| Parâmetro  | Tipo   | Descrição                                                                 |
+| ---------- | ------ | ------------------------------------------------------------------------- |
+| `content`  | string | Mensagem de sucesso que confirma a criação da página                      |
+| `metadata` | object | Metadados da página incluindo título, ID da página, URL e marcas de tempo |
+
+### `notion_query_database`
+
+Consultar e filtrar entradas de banco de dados do Notion com filtragem avançada
+
+#### Entrada
+
+| Parâmetro    | Tipo   | Obrigatório | Descrição                                                  |
+| ------------ | ------ | ----------- | ---------------------------------------------------------- |
+| `databaseId` | string | Sim         | O ID do banco de dados a consultar                         |
+| `filter`     | string | Não         | Condições de filtro em formato JSON (opcional)             |
+| `sorts`      | string | Não         | Critérios de ordenação como array JSON (opcional)          |
+| `pageSize`   | number | Não         | Número de resultados a retornar (padrão: 100, máximo: 100) |
+
+#### Saída
+
+| Parâmetro  | Tipo   | Descrição                                                                                                                  |
+| ---------- | ------ | -------------------------------------------------------------------------------------------------------------------------- |
+| `content`  | string | Lista formatada de entradas do banco de dados com suas propriedades                                                        |
+| `metadata` | object | Metadados da consulta incluindo contagem total de resultados, informações de paginação e array de resultados sem processar |
+
+### `notion_search`
+
+Buscar em todas as páginas e bancos de dados no espaço de trabalho do Notion
+
+#### Entrada
+
+| Parâmetro    | Tipo   | Obrigatório | Descrição                                                                      |
+| ------------ | ------ | ----------- | ------------------------------------------------------------------------------ |
+| `query`      | string | Não         | Termos de busca (deixar vazio para obter todas as páginas)                     |
+| `filterType` | string | Não         | Filtrar por tipo de objeto: página, banco de dados, ou deixar vazio para todos |
+| `pageSize`   | number | Não         | Número de resultados a retornar (padrão: 100, máximo: 100)                     |
+
+#### Saída
+
+| Parâmetro  | Tipo   | Descrição                                                                                                                |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `content`  | string | Lista formatada de resultados da busca incluindo páginas e bancos de dados                                               |
+| `metadata` | object | Metadados da busca incluindo contagem total de resultados, informações de paginação e matriz de resultados sem processar |
+
+### `notion_create_database`
+
+Criar um novo banco de dados no Notion com propriedades personalizadas
+
+#### Entrada
+
+| Parâmetro    | Tipo   | Obrigatório | Descrição                                                                                                         |
+| ------------ | ------ | ----------- | ----------------------------------------------------------------------------------------------------------------- |
+| `parentId`   | string | Sim         | ID da página principal onde o banco de dados será criado                                                          |
+| `title`      | string | Sim         | Título para o novo banco de dados                                                                                 |
+| `properties` | string | Não         | Propriedades do banco de dados como objeto JSON (opcional, criará uma propriedade "Nome" padrão se estiver vazio) |
+
+#### Saída
+
+| Parâmetro  | Tipo   | Descrição                                                                                         |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------- |
+| `content`  | string | Mensagem de sucesso com detalhes do banco de dados e lista de propriedades                        |
+| `metadata` | object | Metadados do banco de dados incluindo ID, título, URL, tempo de criação e esquema de propriedades |
+
+## Notas
+
+- Categoria: `tools`
+- Tipo: `notion`

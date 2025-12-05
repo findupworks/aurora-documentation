@@ -1,0 +1,74 @@
+---
+title: Visão Geral
+description: Ferramentas poderosas para melhorar seus fluxos de trabalho de agentes
+---
+
+As ferramentas são componentes poderosos no Aurora Workflow que permitem aos seus fluxos de trabalho interagir com serviços externos, processar dados e realizar tarefas especializadas. Elas ampliam as capacidades dos seus agentes e fluxos de trabalho fornecendo acesso a várias APIs e serviços.
+
+## O que é uma ferramenta?
+
+Uma ferramenta é um componente especializado que fornece uma funcionalidade específica ou integração com serviços externos. As ferramentas podem ser usadas para buscar na web, interagir com bancos de dados, processar imagens, gerar texto ou imagens, comunicar através de plataformas de mensagens e muito mais.
+
+## Uso de ferramentas em fluxos de trabalho
+
+Há duas formas principais de usar ferramentas nos seus fluxos de trabalho do Sim:
+
+<Steps>
+  <Step>
+    <strong>Como blocos independentes</strong>: As ferramentas podem ser
+    adicionadas como blocos individuais no canvas quando você precisa de acesso
+    determinístico e direto à sua funcionalidade. Isso oferece controle preciso
+    sobre quando e como a ferramenta é chamada.
+  </Step>
+  <Step>
+    <strong>Como ferramentas de agente</strong>: As ferramentas podem ser
+    adicionadas aos blocos de Agente clicando em "Adicionar ferramentas" e
+    configurando os parâmetros necessários. Isso permite que os agentes escolham
+    dinamicamente quais ferramentas usar de acordo com o contexto e os
+    requisitos da tarefa.
+  </Step>
+</Steps>
+
+## Configuração de ferramentas
+
+Cada ferramenta requer uma configuração específica para funcionar corretamente. Os elementos comuns de configuração incluem:
+
+- **Chaves API**: Muitas ferramentas requerem autenticação através de chaves API
+- **Parâmetros de conexão**: Endpoints, identificadores de banco de dados, etc.
+- **Formato de entrada**: Como os dados devem ser estruturados para a ferramenta
+- **Tratamento de saída**: Como processar os resultados da ferramenta
+
+## Ferramentas disponíveis
+
+O Aurora Workflow fornece uma coleção diversa de ferramentas para vários propósitos, incluindo:
+
+- **IA e processamento de linguagem**: OpenAI, ElevenLabs, serviços de tradução
+- **Busca e pesquisa**: Google Search, Tavily, Exa, Perplexity
+- **Manipulação de documentos**: Google Docs, Google Sheets, Notion, Confluence
+- **Processamento de mídia**: Vision, Image Generator
+- **Comunicação**: Slack, WhatsApp, Twilio SMS, Gmail
+- **Armazenamento de dados**: Pinecone, Supabase, Airtable
+- **Desenvolvimento**: GitHub
+
+Cada ferramenta tem sua própria página de documentação dedicada com instruções detalhadas sobre configuração e uso.
+
+## Resultados das ferramentas
+
+As ferramentas normalmente retornam dados estruturados que podem ser processados por blocos subsequentes no seu fluxo de trabalho. O formato desses dados varia dependendo da ferramenta e operação, mas geralmente inclui:
+
+- O conteúdo principal ou resultado
+- Metadados sobre a operação
+- Informações de status
+
+Consulte a documentação específica de cada ferramenta para entender seu formato exato de saída.
+
+## Configuração YAML
+
+Para uma configuração detalhada do fluxo de trabalho em YAML e sua sintaxe, consulte a documentação de [Referência de fluxos de trabalho YAML](/workflow/pt-BR/yaml). Isso inclui guias completos para:
+
+- **Sintaxe de referência de blocos**: Como conectar e referenciar dados entre blocos
+- **Configuração de ferramentas**: Uso de ferramentas tanto em blocos independentes quanto em configurações de agentes
+- **Variáveis de ambiente**: Tratamento seguro de chaves API e credenciais
+- **Exemplos completos**: Padrões e configurações de fluxos de trabalho do mundo real
+
+Para parâmetros específicos de ferramentas e opções de configuração, consulte a página de documentação individual de cada ferramenta.

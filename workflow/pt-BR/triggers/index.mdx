@@ -1,0 +1,58 @@
+---
+title: Visão Geral
+description: Principais formas de iniciar fluxos de trabalho do Workflow
+---
+
+<div className="flex justify-center my-6">
+  ![Exemplo de Triggers](/images/triggers.png)
+</div>
+
+## Disparadores principais
+
+Escolha um disparador por fluxo de trabalho para definir como ele começa:
+
+<Columns cols={2}>
+  <Card title="API" href="/workflow/pt-BR/triggers/api">
+    Endpoint HTTP que mapeia corpos JSON para entradas de fluxo de trabalho
+  </Card>
+  <Card title="Chat" href="/workflow/pt-BR/triggers/chat">
+    Interface de chat implementada com respostas em streaming
+  </Card>
+  <Card
+    title="Formulário de entrada"
+    href="/workflow/pt-BR/triggers/input-form"
+  >
+    Entrada manual tipada utilizada em execuções do editor e fluxos de trabalho
+    secundários
+  </Card>
+  <Card title="Manual" href="/workflow/pt-BR/triggers/manual">
+    Execuções sob demanda sem dados adicionais
+  </Card>
+  <Card title="Agendamento" href="/workflow/pt-BR/triggers/schedule">
+    Execução baseada em cron ou intervalos
+  </Card>
+  <Card title="Webhook" href="/workflow/pt-BR/triggers/webhook">
+    Recebe cargas úteis de webhooks externos
+  </Card>
+</Columns>
+
+## Comparação rápida
+
+| Disparador                | Condição de início                                             |
+| ------------------------- | -------------------------------------------------------------- |
+| **API**                   | POST HTTP autenticado                                          |
+| **Chat**                  | Mensagem de implementação de chat                              |
+| **Formulário de entrada** | Ao enviar manualmente no editor ou fluxo de trabalho principal |
+| **Manual**                | Botão de execução no editor                                    |
+| **Agendamento**           | Temporizador gerenciado no modal de agendamento                |
+| **Webhook**               | Ao receber uma solicitação HTTP                                |
+
+## Uso de disparadores
+
+1. Coloque o bloco disparador no slot de início.
+2. Configure qualquer esquema ou autenticação necessária.
+3. Conecte o bloco ao resto do fluxo de trabalho.
+
+> As implementações potencializam cada disparador. Atualize o fluxo de trabalho, reimplemente-o, e todos os pontos de entrada de disparadores capturam a nova instantânea. Saiba mais em [Execução → Instantâneas de implementação](/workflow/pt-BR/execution).
+
+Os blocos de início herdados permanecem para fluxos existentes, mas não aparecem mais em novas compilações.
