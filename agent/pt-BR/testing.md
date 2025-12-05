@@ -1,3 +1,6 @@
+---
+---
+
 # Testando e Otimizando Agentes
 
 Testar seus agentes regularmente é essencial para garantir que eles estão funcionando corretamente e fornecendo respostas de qualidade.
@@ -54,6 +57,20 @@ O playground permite testar seu agente antes de publicá-lo:
 
 ## Próximos Passos
 
-- [Monitorando Métricas](/docs/agents/metrics)
-- [Otimizando Performance](/docs/agents/optimization)
+<Columns cols={2}>
 
+<Card
+  title="Monitorando Métricas"
+  icon="bar-chart"
+  href="/agent/pt-BR/analytics">
+Acompanhe performance, uso e métricas detalhadas dos seus agentes para entender como os usuários interagem e identificar oportunidades de melhoria.
+</Card>
+
+<Card
+  title="Otimizando Performance"
+  icon="sparkles"
+  href="/agent/pt-BR/analytics">
+Use as métricas e análises para otimizar o desempenho dos seus agentes, ajustando configurações e melhorando respostas baseado em dados.
+</Card>
+
+</Columns>

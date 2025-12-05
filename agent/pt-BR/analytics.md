@@ -52,12 +52,14 @@ A página de Analytics exibe várias métricas organizadas em cards. Vamos enten
 Análise de sentimento das conversas para determinar se as interações foram positivas, neutras ou negativas.
 
 **Valores**:
+
 - **0-40**: Sentimento negativo (precisa atenção)
 - **41-60**: Sentimento neutro
 - **61-80**: Sentimento positivo
 - **81-100**: Sentimento muito positivo
 
 **Como melhorar**:
+
 - Revise conversas com sentimento negativo
 - Ajuste personalidade e tom de voz
 - Melhore conhecimento e respostas
@@ -65,7 +67,7 @@ Análise de sentimento das conversas para determinar se as interações foram po
 
 ### Lacunas de Conhecimento
 
-<Card title="Lacunas de Conhecimento" icon="alert-circle">
+<Card title="Lacunas de Conhecimento" icon="book">
   Identifica perguntas que o agente não conseguiu responder adequadamente.
 </Card>
 
@@ -73,12 +75,14 @@ Análise de sentimento das conversas para determinar se as interações foram po
 Total de perguntas ou situações onde o agente não tinha conhecimento suficiente para fornecer uma resposta adequada.
 
 **Como usar**:
+
 - Revise as lacunas identificadas
 - Adicione documentos relevantes à base de conhecimento
 - Atualize o Prompt do Sistema se necessário
 - Crie regras personalizadas para casos específicos
 
 **Dicas**:
+
 - Lacunas frequentes indicam necessidade de mais conhecimento
 - Use para priorizar quais documentos adicionar
 - Monitore tendências ao longo do tempo
@@ -93,12 +97,14 @@ Total de perguntas ou situações onde o agente não tinha conhecimento suficien
 Tempo médio (em segundos) desde que o usuário envia uma mensagem até o agente responder.
 
 **Interpretação**:
+
 - **< 2 segundos**: Muito rápido (excelente)
 - **2-5 segundos**: Rápido (bom)
 - **5-10 segundos**: Aceitável
 - **> 10 segundos**: Lento (pode melhorar)
 
 **Como melhorar**:
+
 - Otimize o Prompt do Sistema (mais direto)
 - Reduza tamanho máximo de tokens se muito alto
 - Use cache de respostas quando apropriado
@@ -118,27 +124,30 @@ Compare com o tempo médio geral para identificar se a performance melhorou ou p
 
 ### Total de Conversas
 
-<Card title="Total de Conversas" icon="bar-chart-3">
+<Card title="Total de Conversas" icon="list">
   Número total de conversas que o agente teve desde sua criação.
 </Card>
 
 **O que inclui**:
+
 - Todas as conversas iniciadas
 - Conversas ativas e finalizadas
 - Diferentes canais e interfaces
 
 **Como usar**:
+
 - Acompanhe crescimento ao longo do tempo
 - Compare com outros agentes
 - Identifique tendências de uso
 
 ### Total de Mensagens
 
-<Card title="Total de Mensagens" icon="message-square">
+<Card title="Total de Mensagens" icon="message">
   Número total de mensagens trocadas em todas as conversas.
 </Card>
 
 **O que inclui**:
+
 - Mensagens dos usuários
 - Respostas do agente
 - Mensagens do sistema (se aplicável)
@@ -148,24 +157,26 @@ Divida mensagens por conversas para obter a média de mensagens por conversa, in
 
 ### Conversas Mensais
 
-<Card title="Conversas Mensais" icon="trending-up">
+<Card title="Conversas Mensais" icon="arrow-trend-up">
   Número de conversas no mês atual ou no período selecionado.
 </Card>
 
 **Uso**:  
 Acompanhe atividade mensal para identificar:
+
 - Crescimento ou declínio de uso
 - Padrões sazonais
 - Impacto de mudanças ou campanhas
 
 ### Mensagens Mensais
 
-<Card title="Mensagens Mensais" icon="message-square">
+<Card title="Mensagens Mensais" icon="marrow-trend-up">
   Número de mensagens no mês atual ou no período selecionado.
 </Card>
 
 **Uso**:  
 Combine com conversas mensais para entender:
+
 - Engajamento médio por conversa
 - Profundidade das interações
 - Tendências de uso
@@ -180,6 +191,7 @@ Combine com conversas mensais para entender:
 Unidades de consumo que medem o uso de recursos do modelo de IA. Cada mensagem processada consome créditos.
 
 **Como usar**:
+
 - Monitore custos do agente
 - Compare eficiência entre agentes
 - Planeje orçamento baseado em uso
@@ -192,6 +204,7 @@ Unidades de consumo que medem o uso de recursos do modelo de IA. Cada mensagem p
 
 **Uso**:  
 Acompanhe consumo mensal para:
+
 - Gerenciar orçamento
 - Identificar picos de uso
 - Otimizar custos
@@ -206,22 +219,25 @@ Acompanhe consumo mensal para:
 Contagem de usuários distintos que iniciaram pelo menos uma conversa com o agente.
 
 **Como usar**:
+
 - Acompanhe crescimento da base de usuários
 - Compare com total de conversas para entender frequência
 - Identifique usuários recorrentes vs novos
 
 ### Mensagens por Conversa
 
-<Card title="Mensagens por Conversa" icon="message-square">
+<Card title="Mensagens por Conversa" icon="list">
   Média de mensagens trocadas por conversa.
 </Card>
 
 **O que indica**:
+
 - **Baixo (1-3)**: Conversas rápidas, respostas diretas
 - **Médio (4-8)**: Engajamento moderado
 - **Alto (9+)**: Conversas profundas, alto engajamento
 
 **Como usar**:
+
 - Avalie qualidade das interações
 - Identifique se usuários estão satisfeitos (conversas curtas podem indicar problemas resolvidos rapidamente ou frustração)
 - Compare com outros agentes
@@ -235,42 +251,46 @@ Contagem de usuários distintos que iniciaram pelo menos uma conversa com o agen
 </Card>
 
 **O que mostra**:
+
 - Tendências diárias de uso
 - Picos e quedas de atividade
 - Padrões semanais ou sazonais
 
 **Como usar**:
+
 - Identifique dias de maior atividade
 - Compare períodos diferentes
 - Identifique tendências de crescimento ou declínio
 
 ### Gráfico de Mensagens Diárias
 
-<Card title="Mensagens ao Longo do Tempo" icon="activity">
+<Card title="Mensagens ao Longo do Tempo" icon="bar-chart">
   Visualize o número de mensagens por dia no período selecionado.
 </Card>
 
 **Uso**:  
 Combine com gráfico de conversas para entender:
+
 - Se conversas estão ficando mais longas ou curtas
 - Padrões de engajamento
 - Relação entre volume de conversas e mensagens
 
 ### Gráfico de Créditos Diários
 
-<Card title="Consumo de Créditos" icon="trending-up">
+<Card title="Consumo de Créditos" icon="coins">
   Visualize o consumo de créditos por dia.
 </Card>
 
 **Uso**:  
 Monitore custos diários para:
+
 - Identificar picos de consumo
 - Planejar orçamento
 - Otimizar uso de recursos
 
 ## Conversas Ativas
 
-<Card title="Conversas Ativas" icon="message-circle">
+<Card title="Conversas Ativas" icon="check">
   Número de conversas que estão em andamento no momento.
 </Card>
 
@@ -279,6 +299,7 @@ Conversas que foram iniciadas mas ainda não foram finalizadas ou arquivadas.
 
 **Uso**:  
 Acompanhe carga atual do agente:
+
 - Muitas conversas ativas podem indicar alta demanda
 - Poucas conversas ativas podem indicar baixo engajamento ou problemas
 
@@ -287,14 +308,14 @@ Acompanhe carga atual do agente:
 ### Indicadores de Saúde do Agente
 
 <CardGroup cols={2}>
-  <Card title="✅ Agente Saudável" icon="check-circle">
+  <Card title="Agente Saudável" icon="check-circle">
     - Score de sentimento > 70
     - Tempo de resposta < 5 segundos
     - Poucas lacunas de conhecimento
     - Crescimento consistente de conversas
     - Engajamento adequado (mensagens por conversa)
   </Card>
-  <Card title="⚠️ Precisa Atenção" icon="alert-triangle">
+  <Card title="Precisa Atenção" icon="brake-warning">
     - Score de sentimento < 50
     - Tempo de resposta > 10 segundos
     - Muitas lacunas de conhecimento
@@ -435,4 +456,3 @@ Compare métricas entre períodos:
 <Tip>
   **Aja Rapidamente**: Quando identificar problemas, aja rapidamente para melhorar a experiência do usuário.
 </Tip>
-

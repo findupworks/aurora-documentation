@@ -24,17 +24,17 @@ Os **Canais** definem onde e como seus agentes estarão disponíveis para intera
 ## Tipos de Canais
 
 <CardGroup cols={2}>
-  <Card title="Canais de Mensagens" icon="message-square">
-    Canais de comunicação direta como WhatsApp, Telegram, etc.
+  <Card title="Chat Web" icon="globe">
+    Interface de chat integrada diretamente na plataforma Aurora AI
   </Card>
-  <Card title="Canais Embed" icon="code">
-    Widgets para incorporar em sites e aplicações
+  <Card title="Chat Embed" icon="code">
+    Widget para incorporar em sites e aplicações web
   </Card>
-  <Card title="Canais Nativos" icon="smartphone">
-    Integrações com aplicativos nativos
+  <Card title="Slack" icon="slack">
+    Integração com Slack para comunicação em canais e conversas
   </Card>
-  <Card title="Webhooks" icon="webhook">
-    Integrações via HTTP para sistemas externos
+  <Card title="Telegram" icon="send">
+    Integração com Telegram para comunicação via bot
   </Card>
 </CardGroup>
 
@@ -47,16 +47,19 @@ Os **Canais** definem onde e como seus agentes estarão disponíveis para intera
 </Card>
 
 **Características**:
+
 - Disponível automaticamente para todos os agentes
 - Interface nativa da plataforma
 - Histórico persistente
 - Integração completa com analytics
 
 **Configuração**:
+
 - Geralmente não requer configuração adicional
 - Pode ser personalizado através das configurações gerais do agente
 
 **Quando usar**:
+
 - Testes e desenvolvimento
 - Uso interno da organização
 - Demonstrações e protótipos
@@ -68,6 +71,7 @@ Os **Canais** definem onde e como seus agentes estarão disponíveis para intera
 </Card>
 
 **Características**:
+
 - Widget personalizável
 - Responsivo (mobile e desktop)
 - Fácil de integrar
@@ -117,38 +121,44 @@ Os **Canais** definem onde e como seus agentes estarão disponíveis para intera
 </AccordionGroup>
 
 **Quando usar**:
+
 - Sites corporativos
 - Aplicações web
 - Landing pages
 - Portais de suporte
 
-### WhatsApp Business
+### Slack
 
-<Card title="WhatsApp Business" icon="message-circle">
-  Integração com WhatsApp Business para comunicação via WhatsApp.
+<Card title="Slack" icon="slack">
+  Integração com Slack para que seus agentes possam responder mensagens diretamente nos canais e conversas do Slack da sua equipe.
 </Card>
 
 **Características**:
-- Comunicação através do WhatsApp
-- Suporte a mídia (imagens, documentos)
-- Notificações push nativas
-- Alta taxa de abertura
+
+- Comunicação através do Slack
+- Respostas em canais públicos e privados
+- Suporte a threads e menções
+- Notificações nativas do Slack
+- Integração com workspace do Slack
 
 **Configuração**:
 
 <Steps>
   <Step title="Ativar Canal">
-    Clique em **Ativar** no canal WhatsApp Business.
+    Clique em **Ativar** no canal Slack.
   </Step>
   <Step title="Preencher Credenciais">
     Você precisará fornecer:
     
-    - **Número do Telefone**: Número do WhatsApp Business (formato internacional)
-    - **ID da Conta Business**: ID da sua conta WhatsApp Business
-    - **Token de Acesso**: Token de API do WhatsApp Business
+    - **Token do Bot**: Token OAuth do Slack obtido ao criar o app
+    - **Signing Secret**: Secret usado para verificar requisições do Slack
+    - **Workspace**: Workspace do Slack onde o bot será instalado
+  </Step>
+  <Step title="Instalar App no Slack">
+    Siga o link de instalação para adicionar o app ao seu workspace do Slack.
   </Step>
   <Step title="Verificar Conexão">
-    O sistema verificará a conexão com a API do WhatsApp.
+    O sistema verificará a conexão com a API do Slack.
   </Step>
   <Step title="Salvar">
     Salve as configurações. O canal estará ativo.
@@ -156,16 +166,20 @@ Os **Canais** definem onde e como seus agentes estarão disponíveis para intera
 </Steps>
 
 **Onde obter credenciais**:
-- Acesse o WhatsApp Business API
-- Crie uma conta Business se necessário
-- Gere token de acesso na plataforma do WhatsApp
-- Configure webhook para receber mensagens
+
+- Acesse https://api.slack.com/apps
+- Crie um novo app ou use um existente
+- Vá para "OAuth & Permissions" e gere o token
+- Copie o "Signing Secret" em "Basic Information"
+- Configure as permissões necessárias (chat:write, channels:read, etc.)
 
 **Quando usar**:
-- Suporte ao cliente via WhatsApp
-- Vendas e atendimento
-- Comunicação com clientes
-- Notificações e lembretes
+
+- Suporte interno da equipe
+- Automação de respostas em canais
+- Integração com workflows do Slack
+- Notificações e alertas automatizados
+- Assistente para equipes
 
 ### Telegram
 
@@ -197,106 +211,12 @@ Os **Canais** definem onde e como seus agentes estarão disponíveis para intera
 </Steps>
 
 **Quando usar**:
+
 - Comunidades no Telegram
 - Suporte via Telegram
 - Notificações e alertas
 - Integração com grupos
-
-### Webhook
-
-<Card title="Webhook" icon="webhook">
-  Integração via HTTP para sistemas externos através de webhooks.
-</Card>
-
-**Características**:
-- Integração com qualquer sistema
-- Controle total sobre implementação
-- Flexível e customizável
-- Para desenvolvedores
-
-**Configuração**:
-
-<Steps>
-  <Step title="Ativar Canal">
-    Clique em **Ativar** no canal Webhook.
-  </Step>
-  <Step title="Configurar Endpoint">
-    Forneça:
-    
-    - **URL do Webhook**: Endpoint que receberá eventos
-    - **Método HTTP**: POST (padrão)
-    - **Headers**: Headers customizados se necessário
-    - **Autenticação**: Token ou credenciais se necessário
-  </Step>
-  <Step title="Configurar Eventos">
-    Escolha quais eventos enviar:
-    
-    - Início de conversa
-    - Nova mensagem
-    - Fim de conversa
-    - Outros eventos
-  </Step>
-  <Step title="Testar">
-    Use o botão de teste para verificar se o webhook está funcionando.
-  </Step>
-  <Step title="Salvar">
-    Salve as configurações.
-  </Step>
-</Steps>
-
-**Formato dos Eventos**:
-
-Os eventos são enviados como JSON no formato:
-
-```json
-{
-  "event": "message.received",
-  "timestamp": "2024-01-15T10:30:00Z",
-  "agentId": "agent-123",
-  "conversationId": "conv-456",
-  "data": {
-    "message": "Texto da mensagem",
-    "userId": "user-789"
-  }
-}
-```
-
-**Quando usar**:
-- Integração com sistemas próprios
-- CRMs e sistemas de gestão
-- Aplicações customizadas
-- Automações complexas
-
-### FindUP App
-
-<Card title="FindUP App" icon="smartphone">
-  Integração com o aplicativo FindUP para comunicação direta.
-</Card>
-
-**Configuração**:
-
-<Steps>
-  <Step title="Ativar Canal">
-    Clique em **Ativar** no canal FindUP App.
-  </Step>
-  <Step title="Configurar">
-    Preencha:
-    
-    - **URL do Cliente**: URL base da instância do FindUP
-    - **Chave da API**: Chave de autenticação da API
-  </Step>
-  <Step title="Verificar Conexão">
-    O sistema verificará a conexão.
-  </Step>
-  <Step title="Salvar">
-    Salve as configurações.
-  </Step>
-</Steps>
-
-**Quando usar**:
-- Integração com ecossistema FindUP
-- Aplicações móveis FindUP
-- Casos de uso específicos FindUP
+- Bots públicos ou privados
 
 ## Gerenciando Canais Ativos
 
@@ -307,6 +227,7 @@ Os eventos são enviados como JSON no formato:
 </Card>
 
 **Informações exibidas**:
+
 - Nome do canal
 - Status (Ativo/Inativo)
 - Data de ativação
@@ -357,11 +278,13 @@ Os eventos são enviados como JSON no formato:
 </Card>
 
 **Canais que podem ter restrições**:
+
 - Alguns canais públicos podem requerer `PUBLIC` ou `ORGANIZATION`
 - Canais internos podem requerer `ORGANIZATION` ou `TEAM`
 - Verifique as mensagens de aviso ao ativar canais
 
 **Como resolver**:
+
 1. Veja a mensagem de aviso ao tentar ativar
 2. Ajuste o Security Access do agente se necessário
 3. Tente ativar o canal novamente
@@ -383,9 +306,9 @@ Os eventos são enviados como JSON no formato:
     Envie uma mensagem de teste através do canal:
     
     - Para Chat Web: Use a interface diretamente
-    - Para Embed: Abra o site com o widget
-    - Para WhatsApp: Envie mensagem para o número configurado
-    - Para Webhook: Envie evento de teste
+    - Para Chat Embed: Abra o site com o widget
+    - Para Slack: Envie mensagem em um canal ou conversa direta
+    - Para Telegram: Envie mensagem para o bot configurado
   </Step>
   <Step title="Verificar Resposta">
     Confirme que o agente respondeu corretamente.
@@ -401,6 +324,7 @@ Os eventos são enviados como JSON no formato:
 </Card>
 
 **Métricas disponíveis**:
+
 - Número de conversas por canal
 - Volume de mensagens
 - Taxa de resposta
@@ -408,6 +332,7 @@ Os eventos são enviados como JSON no formato:
 - Satisfação do usuário
 
 **Como acessar**:
+
 - Vá para Analytics do agente
 - Filtre por canal específico
 - Veja métricas detalhadas
@@ -415,17 +340,17 @@ Os eventos são enviados como JSON no formato:
 ## Próximos Passos
 
 <CardGroup cols={2}>
-  <Card title="Ver Analytics" icon="bar-chart" href="/docs/agents/analytics">
+  <Card title="Ver Analytics" icon="bar-chart" href="/agent/pt-BR/analytics">
     Monitore performance dos canais
   </Card>
-  <Card title="Gerenciar Conversas" icon="message-square" href="/docs/agents/conversations">
+  <Card title="Gerenciar Conversas" icon="message-square" href="/agent/pt-BR/conversations">
     Veja conversas por canal
   </Card>
-  <Card title="Personalizar Embed" icon="code" href="/docs/chat/embed">
+  <Card title="Personalizar Embed" icon="code" href="/geral/pt-BR/chat/embed">
     Personalize widget de chat embed
   </Card>
-  <Card title="Configurar Webhooks" icon="webhook" href="/docs/workflows/integrations">
-    Configure integrações avançadas
+  <Card title="Configurar Chat Web" icon="message" href="/geral/pt-BR/chat/web">
+    Configure a interface de chat web
   </Card>
 </CardGroup>
 
@@ -460,7 +385,8 @@ Os eventos são enviados como JSON no formato:
     - Se o canal está ativo
     - Se as credenciais estão corretas
     - Se há erros na configuração
-    - Se o webhook está configurado corretamente (para canais que usam)
+    - Se o bot está instalado corretamente (Slack/Telegram)
+    - Se as permissões estão configuradas corretamente (Slack)
   </Accordion>
   <Accordion title="Mensagens não estão sendo respondidas">
     Verifique:
@@ -479,4 +405,3 @@ Os eventos são enviados como JSON no formato:
     - Se há limites do plano que impedem ativação
   </Accordion>
 </AccordionGroup>
-
